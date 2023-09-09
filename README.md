@@ -2,7 +2,12 @@
 
 A secure file sharing application using HTML, JavaScript, PHP, Mysql and a REST API. This application allows users to upload, share, and manage files securely.
 
-## Setup
+## Overview
+
+The steps followed to create this application are the following: <br>
+Basic Frontend, Database Setup, API, Connections, Refactoring, Polishing Frontend.
+
+## Setup Instructions
 
 ### XAMPP
 
