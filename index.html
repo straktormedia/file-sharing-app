@@ -74,12 +74,13 @@
       <!-- File upload form -->
       <form id="file-upload-form">
         <input
+          file-input
           type="file"
           id="file-input"
           accept=".pdf, .doc, .jpg, .png"
           required
         />
-        <button data-action="upload">Upload File</button>
+        <button upload-btn>Upload File</button>
         <div data-container="progress">
           <div data-progress="bar"></div>
           <span data-progress="text">0%</span>

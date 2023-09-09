@@ -1,21 +1,18 @@
 <?php
-// Check if a file was uploaded
+// Check if file was uploaded
 if (isset($_FILES['file'])) {
     $file = $_FILES['file'];
 
-    // Define the directory where uploaded files will be saved
+    // Set Uploads directory
     $uploadDirectory = 'uploads/';
 
-    // Ensure the directory exists, or create it if necessary
+    // If the directory doesn't exist, create it
     if (!is_dir($uploadDirectory)) {
-        mkdir($uploadDirectory, 0755, true);
+        mkdir($uploadDirectory, true); 
     }
 
-    // Generate a unique filename for the uploaded file
-    $filename = $uploadDirectory . uniqid() . '_' . $file['name'];
-
-    // Move the uploaded file to the destination directory
-    if (move_uploaded_file($file['tmp_name'], $filename)) {
+    // move_uploaded_file() moves the uploaded file from a temporary file path on the server where the uploaded file is stored temporarily after the user has submitted it("tmp_name") to the directory specified by $uploadDirectory, using the original filename (accessed via $file['name']).
+    if (move_uploaded_file($file['tmp_name'], $uploadDirectory . $file['name'])) {
         // File upload was successful
         $response = array('success' => true, 'message' => 'File uploaded successfully.');
     } else {
