@@ -24,17 +24,20 @@ if (isset($_GET["id"])) {
         exit();
     }
 
-    // Query the database to check if the file belongs to the user
-    $stmt = $conn->prepare("SELECT id FROM uploaded_files WHERE id = ? AND user_id = ?");
+    // Query the database to check if the file belongs to the user and get the file name
+    $stmt = $conn->prepare("SELECT filename FROM uploaded_files WHERE id = ? AND user_id = ?");
     $stmt->bind_param("ii", $fileId, $userId);
     $stmt->execute();
-    $stmt->store_result();
+    $result = $stmt->get_result();
 
-    if ($stmt->num_rows > 0) {
-        // For example, you can generate a shareable link to the file
+    if ($result->num_rows > 0) {
+        // File with the specified ID belongs to the user
+        $fileInfo = $result->fetch_assoc();
+        $filename = $fileInfo['filename'];
 
-        // For demonstration purposes, let's assume sharing is successful
-        $shareableLink = "http://localhost/file-sharing-app/uploads/user_7/?id=$fileId";
+        // Generate the real file location based on the user's ID and filename
+        $shareableLink = "http://localhost/file-sharing-app/uploads/user_$userId/$filename";
+
         $response = array('success' => true, 'message' => 'File shared successfully.', 'shareable_link' => $shareableLink);
     } else {
         // File with the specified ID doesn't belong to the user
