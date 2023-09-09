@@ -71,6 +71,7 @@ registrationForm.addEventListener("submit", async (e) => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   const confirmPassword = document.getElementById("confirm-password").value;
+  const role = document.getElementById("role").value;
 
   /*
   if (// Add your validation logic here ) {
@@ -81,6 +82,9 @@ registrationForm.addEventListener("submit", async (e) => {
   */
 
   // If validation passes, send the data to the server
+
+  const requestBody = `username=${username}&email=${email}&password=${password}&confirm-password=${confirmPassword}&role=${role}`;
+
   try {
     const response = await fetch(
       "http://localhost/file-sharing-app/register.php",
@@ -89,7 +93,7 @@ registrationForm.addEventListener("submit", async (e) => {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: `username=${username}&email=${email}&password=${password}&confirm-password=${confirmPassword}`,
+        body: requestBody,
       }
     );
 

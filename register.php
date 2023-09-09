@@ -6,6 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $email = $_POST["email"]; 
     $password = password_hash($_POST["password"], PASSWORD_DEFAULT); // Hash the password
+    $role = $_POST["role"]; 
 
     // Insert user data into the database
     $conn = new mysqli("localhost", "root", "", "file-sharing-app");
@@ -16,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')"; // Include email field
+    $sql = "INSERT INTO users (username, email, password, role) VALUES ('$username', '$email', '$password', '$role')"; 
     if ($conn->query($sql) === TRUE) {
         // Send a success JSON response
         echo json_encode(array('success' => true, 'message' => 'Registration successful'));
