@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $sql = "SELECT id, username, password FROM users WHERE username = '$username'";
+    $sql = "SELECT id, username, password, role FROM users WHERE username = '$username'";
     $result = $conn->query($sql);
 
     if ($result->num_rows == 1) {
@@ -25,9 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_start();
             $_SESSION["user_id"] = $row["id"];
             $_SESSION["username"] = $row["username"];
+            $_SESSION["role"] = $row["role"]; // Include the role in the session
 
-            // Send a success JSON response
-            echo json_encode(array('success' => true, 'message' => 'Login successful'));
+            // Send a success JSON response with the role
+            echo json_encode(array('success' => true, 'message' => 'Login successful', 'role' => $row["role"]));
         } else {
             // Send an error JSON response
             http_response_code(401); // Set a 401 Unauthorized status code
@@ -41,4 +42,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $conn->close();
 }
+
 ?>
