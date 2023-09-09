@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure File Sharing App</title>
+    <!-- <link rel="stylesheet" href="styles.css" /> -->
+  </head>
+  <body>
+    <!-- Menu -->
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#login">Login</a></li>
+        <li><a href="#register">Register</a></li>
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#file-management">File Management</a></li>
+      </ul>
+    </nav>
+
+    <!-- Register -->
+    <section id="register">
+      <h2>User Registration</h2>
+      <form id="registration-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+
+        <label for="confirm-password">Confirm Password:</label>
+        <input
+          type="password"
+          id="confirm-password"
+          name="confirm-password"
+          required
+        />
+
+        <button type="submit">Register</button>
+      </form>
+    </section>
+
+    <!-- Login -->
+    <section id="login">
+      <h2>User Login</h2>
+      <form id="login-form">
+        <label for="login-username">Username:</label>
+        <input type="text" id="login-username" name="login-username" required />
+
+        <label for="login-password">Password:</label>
+        <input
+          type="password"
+          id="login-password"
+          name="login-password"
+          required
+        />
+
+        <button type="submit">Login</button>
+      </form>
+    </section>
+
+    <!-- Profile -->
+    <section id="profile">
+      <h2>User Profile Management</h2>
+      <!-- User profile information here -->
+    </section>
+
+    <!-- File Management -->
+    <section id="file-management">
+      <h2>File Management</h2>
+      <!-- File upload form -->
+      <form id="file-upload-form">
+        <input
+          type="file"
+          id="file-input"
+          accept=".pdf, .doc, .jpg, .png"
+          required
+        />
+        <button data-action="upload">Upload File</button>
+        <div data-container="progress">
+          <div data-progress="bar"></div>
+          <span data-progress="text">0%</span>
+        </div>
+      </form>
+
+      <!-- Display list of uploaded files -->
+      <div id="file-list">
+        <!-- File entries will be dynamically added here -->
+      </div>
+    </section>
+
+    <script src="src/js/script.js"></script>
+  </body>
+</html>
