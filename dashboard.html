@@ -7,20 +7,11 @@
     <link rel="stylesheet" href="src/css/main.css" />
   </head>
   <body>
-    <!-- Menu -->
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#login">Login</a></li>
-        <li><a href="#register">Register</a></li>
-        <li><a href="#profile">Profile</a></li>
-        <li><a href="#file-management">File Management</a></li>
-      </ul>
-    </nav>
-    <!-- Add this button where you want the "Logout" action -->
-    <form action="logout.php" method="post">
-      <input type="submit" value="Logout" />
-    </form>
+    <div class="logout">
+      <form action="logout.php" method="post">
+        <input type="submit" value="Logout" />
+      </form>
+    </div>
 
     <section>
       <h1>Welcome Regular User</h1>
@@ -28,13 +19,13 @@
 
     <!-- Profile -->
     <section id="profile">
-      <h2>User Profile Management</h2>
+      <h2>Profile</h2>
       <!-- User profile information here -->
     </section>
 
     <!-- File Management -->
     <section id="file-management">
-      <h2>File Management</h2>
+      <h2>Upload a File</h2>
       <!-- File upload form -->
       <form id="file-upload-form">
         <input
@@ -52,7 +43,7 @@
       </form>
 
       <!-- Display list of uploaded files -->
-      <h2>Uploaded Files</h2>
+      <h2>My Files</h2>
       <div id="file-list">
         <!-- File entries will be dynamically added here -->
       </div>

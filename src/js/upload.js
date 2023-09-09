@@ -56,6 +56,27 @@ const listFiles = async () => {
           data.files.forEach((file) => {
             const fileEntry = document.createElement("div");
             fileEntry.textContent = file.filename;
+
+            // Create buttons for delete, share, and download
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.addEventListener("click", () => handleDelete(file.id));
+
+            const shareButton = document.createElement("button");
+            shareButton.textContent = "Share";
+            shareButton.addEventListener("click", () => handleShare(file.id));
+
+            const downloadButton = document.createElement("button");
+            downloadButton.textContent = "Download";
+            downloadButton.addEventListener("click", () =>
+              handleDownload(file.id)
+            );
+
+            // Append buttons to file entry
+            fileEntry.appendChild(deleteButton);
+            fileEntry.appendChild(shareButton);
+            fileEntry.appendChild(downloadButton);
+
             fileList.appendChild(fileEntry);
           });
         } else {
@@ -71,6 +92,24 @@ const listFiles = async () => {
     }
   } catch (error) {
     console.error("Network error occurred:", error.message);
+  }
+};
+
+// Handle Delete File
+const handleDelete = async (fileId) => {
+  // Send a request to delete.php with the file ID
+  const response = await fetch(
+    `http://localhost/file-sharing-app/api/delete.php?id=${fileId}`,
+    {
+      method: "DELETE",
+    }
+  );
+
+  if (response.ok) {
+    // File deleted successfully, update the UI
+    listFiles();
+  } else {
+    console.error("Failed to delete file:", response.statusText);
   }
 };
 
