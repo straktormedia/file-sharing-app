@@ -1,4 +1,4 @@
-# File Sharing App :cloud:
+# File Sharing App :blue_book: :point_right: :cloud:
 
 A secure file sharing application using HTML, JavaScript, PHP, Mysql and a REST API. This application allows users to upload, share, and manage files securely.
 
