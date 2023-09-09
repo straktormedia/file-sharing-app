@@ -35,9 +35,43 @@ const uploadFile = async (formData) => {
   }
 };
 
+// List Files
+const listFiles = async () => {
+  try {
+    const response = await fetch(
+      "http://localhost/file-sharing-app/api/list_my_files.php"
+    );
+    if (response.ok) {
+      const data = await response.json();
+      if (data.success) {
+        const fileList = document.getElementById("file-list");
+
+        if (data.files.length > 0) {
+          data.files.forEach((file) => {
+            const fileEntry = document.createElement("div");
+            fileEntry.textContent = file.filename;
+            fileList.appendChild(fileEntry);
+          });
+        } else {
+          const noFilesMessage = document.createElement("p");
+          noFilesMessage.textContent = "No files uploaded yet.";
+          fileList.appendChild(noFilesMessage);
+        }
+      } else {
+        console.error("Failed to fetch files:", data.message);
+      }
+    } else {
+      console.error("HTTP Error:", response.status);
+    }
+  } catch (error) {
+    console.error("Network error occurred:", error.message);
+  }
+};
+
 // Handle Upload Button
 uploadButton.addEventListener("click", async (e) => {
   e.preventDefault();
+
   const file = fileInput.files[0]; // The uploaded file as an object with useful info
 
   if (file) {
@@ -47,6 +81,7 @@ uploadButton.addEventListener("click", async (e) => {
 
     try {
       await uploadFile(formData);
+      //   await listFiles();
     } catch (error) {
       console.error("An error occurred during file upload:", error);
     }
