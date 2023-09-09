@@ -5,4 +5,10 @@ A secure file sharing application using HTML, JavaScript, PHP, Mysql and a REST 
 ## Setup
 
 XAMPP
+<br>
 phpMyAdmin
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "file-sharing-app";
+<br>
