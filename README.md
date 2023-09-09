@@ -1,4 +1,4 @@
-# File Sharing App
+# File Sharing App :cloud:
 
 A secure file sharing application using HTML, JavaScript, PHP, Mysql and a REST API. This application allows users to upload, share, and manage files securely.
 
