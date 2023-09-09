@@ -1,18 +1,24 @@
 <?php
+session_start();
+
 // Check if file was uploaded
 if (isset($_FILES['file'])) {
     $file = $_FILES['file'];
 
-    // Set Uploads directory
-    $uploadDirectory = '.././uploads/';
+    // Get the user's ID or username from your authentication system
+    $userId = $_SESSION['user_id']; // You can replace this with your actual user ID retrieval logic
+    // Alternatively, you can use the username:
+    // $username = $_SESSION['username'];
 
-    // If the directory doesn't exist, create it
-    if (!is_dir($uploadDirectory)) {
-        mkdir($uploadDirectory, true); 
+    // Create a folder for the user if it doesn't exist
+    $userUploadDirectory = "../uploads/user_$userId/"; // Modify the folder structure as needed
+
+    if (!is_dir($userUploadDirectory)) {
+        mkdir($userUploadDirectory, 0777, true); // Create the user's directory if it doesn't exist
     }
 
-    // move_uploaded_file() moves the uploaded file from a temporary file path on the server where the uploaded file is stored temporarily after the user has submitted it("tmp_name") to the directory specified by $uploadDirectory, using the original filename (accessed via $file['name']).
-    if (move_uploaded_file($file['tmp_name'], $uploadDirectory . $file['name'])) {
+    // Move the uploaded file to the user's directory
+    if (move_uploaded_file($file['tmp_name'], $userUploadDirectory . $file['name'])) {
         // File upload was successful
         $response = array('success' => true, 'message' => 'File uploaded successfully.');
     } else {
@@ -27,4 +33,5 @@ if (isset($_FILES['file'])) {
 // Send a JSON response
 header('Content-Type: application/json');
 echo json_encode($response);
+
 ?>
