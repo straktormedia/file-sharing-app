@@ -1,3 +1,7 @@
+// TO-DO
+// 1. Progress Bar
+// 2. Replace/Skip Message when uploading same file
+
 // Uploads
 const uploadButton = document.querySelector("[upload-btn]");
 const fileInput = document.querySelector("[file-input]");
