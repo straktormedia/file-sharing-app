@@ -13,7 +13,7 @@ const fileInput = document.querySelector("[file-input]");
 const uploadFile = async (formData) => {
   try {
     const response = await fetch(
-      "http://localhost/file-sharing-app/upload.php",
+      "http://localhost/file-sharing-app/api/upload.php",
       {
         method: "POST",
         body: formData,

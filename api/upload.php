@@ -4,7 +4,7 @@ if (isset($_FILES['file'])) {
     $file = $_FILES['file'];
 
     // Set Uploads directory
-    $uploadDirectory = 'uploads/';
+    $uploadDirectory = '.././uploads/';
 
     // If the directory doesn't exist, create it
     if (!is_dir($uploadDirectory)) {
