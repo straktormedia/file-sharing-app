@@ -6,6 +6,7 @@ A secure file sharing application using HTML, JavaScript, PHP, Mysql and a REST 
 
 The steps followed to create this application are the following: <br>
 Basic Frontend, Database Setup, API, Connections, Refactoring, Polishing Frontend.
+For now the files accepted are .pdf, .doc, .jpg, .png.
 
 ## Setup Instructions
 

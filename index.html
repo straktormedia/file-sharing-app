@@ -7,54 +7,75 @@
     <link rel="stylesheet" href="src/css/main.css" />
   </head>
   <body>
-    <!-- Register -->
-    <section id="register">
-      <h2>User Registration</h2>
-      <form id="registration-form">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required />
+    <header class="header">
+      <div
+        class="header__container header__container--login-register boxed centered"
+      >
+        <h1 class="boxed centered logo">File Sharing App 📄 → ☁️</h1>
+      </div>
+    </header>
+    <main class="main boxed centered">
+      <section class="login-register two-col">
+        <!-- Register -->
+        <div id="register" class="component">
+          <h2>Sign Up</h2>
+          <form id="registration-form" class="registration-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required />
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required />
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required />
 
-        <label for="confirm-password">Confirm Password:</label>
-        <input
-          type="password"
-          id="confirm-password"
-          name="confirm-password"
-          required
-        />
-        <label for="role">Role:</label>
-        <select id="role" name="role">
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
+            <label for="confirm-password">Confirm Password:</label>
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirm-password"
+              required
+            />
+            <label for="role">Role:</label>
+            <select id="role" name="role">
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
 
-        <button type="submit">Register</button>
-      </form>
-    </section>
+            <button type="submit" class="button registration-form__button">
+              Register
+            </button>
+          </form>
+        </div>
 
-    <!-- Login -->
-    <section id="login">
-      <h2>User Login</h2>
-      <form id="login-form">
-        <label for="login-username">Username:</label>
-        <input type="text" id="login-username" name="login-username" required />
+        <!-- Login -->
+        <div id="login" class="component">
+          <p>Already have an account?</p>
+          <h2>Login</h2>
+          <form id="login-form" class="login-form">
+            <label for="login-username">Username:</label>
+            <input
+              type="text"
+              id="login-username"
+              name="login-username"
+              required
+            />
 
-        <label for="login-password">Password:</label>
-        <input
-          type="password"
-          id="login-password"
-          name="login-password"
-          required
-        />
+            <label for="login-password">Password:</label>
+            <input
+              type="password"
+              id="login-password"
+              name="login-password"
+              required
+            />
 
-        <button type="submit">Login</button>
-      </form>
-    </section>
+            <button type="submit" class="button login-form__button">
+              Login
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
 
     <script src="src/js/script.js"></script>
   </body>

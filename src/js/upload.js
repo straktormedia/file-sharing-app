@@ -55,20 +55,27 @@ const listFiles = async () => {
         if (data.files.length > 0) {
           data.files.forEach((file) => {
             const fileEntry = document.createElement("div");
+            fileEntry.classList.add("file-list__item");
             fileEntry.textContent = file.filename;
+
+            const buttonsContainer = document.createElement("div");
+            buttonsContainer.classList.add("file-list__buttons-container");
+            fileEntry.appendChild(buttonsContainer);
 
             // Create buttons for delete, share, and download
             const deleteButton = document.createElement("button");
-            deleteButton.textContent = "Delete";
+            deleteButton.classList.add("button-small");
+            deleteButton.textContent = "🗑️";
             deleteButton.addEventListener("click", () => handleDelete(file.id));
 
             const shareButton = document.createElement("button");
-            shareButton.textContent = "Share";
+            shareButton.classList.add("button-small");
+            shareButton.textContent = "🔗";
             shareButton.addEventListener("click", () => handleShare(file.id));
 
             // Append buttons to file entry
-            fileEntry.appendChild(deleteButton);
-            fileEntry.appendChild(shareButton);
+            buttonsContainer.appendChild(deleteButton);
+            buttonsContainer.appendChild(shareButton);
 
             fileList.appendChild(fileEntry);
           });
