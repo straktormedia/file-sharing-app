@@ -107,3 +107,45 @@ registrationForm.addEventListener("submit", async (e) => {
     console.error("Network error occurred: " + error.message);
   }
 });
+
+// Login
+const loginForm = document.getElementById("login-form");
+
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  // Get Login Form Values
+  const username = document.getElementById("login-username").value;
+  const password = document.getElementById("login-password").value;
+
+  // Send login data to the server
+  try {
+    const response = await fetch(
+      "http://localhost/file-sharing-app/login.php",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `username=${username}&password=${password}`,
+      }
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      if (data.success) {
+        // Login successful, redirect to the dashboard
+        window.location.href = "dashboard.html";
+      } else {
+        // Login failed, display error message
+        console.error("Login failed: " + data.message);
+      }
+    } else {
+      // Handle HTTP error responses
+      console.error("HTTP Error: " + response.status);
+    }
+  } catch (error) {
+    // Handle network errors
+    console.error("Network error occurred: " + error.message);
+  }
+});
