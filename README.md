@@ -12,3 +12,10 @@ $username = "root";
 $password = "";
 $database = "file-sharing-app";
 <br>
+
+## TO-DO
+
+1. Progress Bar
+2. Replace/Skip Message when uploading same file
+3. When user Registers, redirect to Login
+4. When user is logged in, redirect to dashboard
