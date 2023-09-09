@@ -21,29 +21,29 @@ if (isset($_FILES['file'])) {
     if (move_uploaded_file($file['tmp_name'], $userUploadDirectory . $file['name'])) {
         // File upload was successful
         $response = array('success' => true, 'message' => 'File uploaded successfully.');
-
+    
         // Insert file metadata into the database
-    $conn = new mysqli("localhost", "root", "", "file-sharing-app");
-    if ($conn->connect_error) {
-        // Handle database connection error
-        $response = array('success' => false, 'message' => 'Database connection failed.');
-    } else {
-        // Prepare and execute the SQL query to insert file metadata
-        $sql = "INSERT INTO uploaded_files (user_id, filename) VALUES (?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("is", $userId, $file['name']); // Change this line to use the original filename
-
-        if ($stmt->execute()) {
-            $response = array('success' => true, 'message' => 'File uploaded successfully.');
+        $conn = new mysqli("localhost", "root", "", "file-sharing-app");
+        if ($conn->connect_error) {
+            // Handle database connection error
+            $response = array('success' => false, 'message' => 'Database connection failed.');
         } else {
-            // Handle database insert error
-            $response = array('success' => false, 'message' => 'File metadata insertion failed.');
+            // Prepare and execute the SQL query to insert file metadata
+            $sql = "INSERT INTO uploaded_files (user_id, filename, file_path) VALUES (?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $file_path = $userUploadDirectory . $file['name']; // Absolute file path
+            $stmt->bind_param("iss", $userId, $file['name'], $file_path); // Use the original filename and absolute file path
+    
+            if ($stmt->execute()) {
+                $response = array('success' => true, 'message' => 'File uploaded successfully.');
+            } else {
+                // Handle database insert error
+                $response = array('success' => false, 'message' => 'File metadata insertion failed.');
+            }
+    
+            $stmt->close();
+            $conn->close();
         }
-
-        $stmt->close();
-        $conn->close();
-    }
-        
     } else {
         // File upload failed
         $response = array('success' => false, 'message' => 'File upload failed.');
