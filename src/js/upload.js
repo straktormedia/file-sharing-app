@@ -66,16 +66,9 @@ const listFiles = async () => {
             shareButton.textContent = "Share";
             shareButton.addEventListener("click", () => handleShare(file.id));
 
-            const downloadButton = document.createElement("button");
-            downloadButton.textContent = "Download";
-            downloadButton.addEventListener("click", () =>
-              handleDownload(file.id)
-            );
-
             // Append buttons to file entry
             fileEntry.appendChild(deleteButton);
             fileEntry.appendChild(shareButton);
-            fileEntry.appendChild(downloadButton);
 
             fileList.appendChild(fileEntry);
           });
@@ -123,9 +116,14 @@ const handleShare = async (fileId) => {
     if (response.ok) {
       const data = await response.json();
       if (data.success) {
-        // Handle successful sharing, e.g., display a success message
-        console.log(data.shareable_link);
-        console.log(`File ${fileId} shared successfully`);
+        // Display the shareable link in the modal
+        const shareableLinkInput =
+          document.getElementById("shareableLinkInput");
+        shareableLinkInput.value = data.shareable_link;
+
+        // Show the modal
+        const shareDialog = document.getElementById("shareDialog");
+        shareDialog.showModal();
       } else {
         // Handle sharing error, e.g., display an error message
         console.error(`File sharing failed: ${data.message}`);
@@ -140,33 +138,12 @@ const handleShare = async (fileId) => {
   }
 };
 
-// Download
-const handleDownload = async (fileId) => {
-  try {
-    const response = await fetch(
-      `http://localhost/file-sharing-app/api/download.php?id=${fileId}`
-    );
-
-    if (response.ok) {
-      // Handle successful download, e.g., initiate the download process
-      // For example, you can redirect the user to the file URL
-      const data = await response.json();
-      if (data.success) {
-        const fileURL = data.url; // The URL to the file
-        window.location.href = fileURL;
-      } else {
-        // Handle download error, e.g., display an error message
-        console.error(`File download failed: ${data.message}`);
-      }
-    } else {
-      // Handle HTTP error responses
-      console.error(`HTTP Error: ${response.status}`);
-    }
-  } catch (error) {
-    // Handle network errors
-    console.error(`Network error occurred: ${error.message}`);
-  }
-};
+// Close the share dialog
+const closeShareDialogButton = document.getElementById("closeShareDialog");
+closeShareDialogButton.addEventListener("click", () => {
+  const shareDialog = document.getElementById("shareDialog");
+  shareDialog.close();
+});
 
 listFiles();
 
