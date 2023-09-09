@@ -5,3 +5,4 @@ A secure file sharing application using HTML, JavaScript, PHP, Mysql and a REST 
 ## Setup
 
 XAMPP
+phpMyAdmin
