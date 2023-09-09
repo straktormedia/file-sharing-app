@@ -1,3 +1,38 @@
 body {
   font-family: system-ui;
 }
+
+.boxed {
+  max-width: 1200px;
+}
+
+.centered {
+  margin: 0 auto;
+}
+
+.header {
+  width: 100%;
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.logout {
+  &__input {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+}
+
+.file-management {
+  margin-top: 120px;
+
+  &__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}

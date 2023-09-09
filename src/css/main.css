@@ -2,4 +2,36 @@ body {
   font-family: system-ui;
 }
 
+.boxed {
+  max-width: 1200px;
+}
+
+.centered {
+  margin: 0 auto;
+}
+
+.header {
+  width: 100%;
+}
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logout__input {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.file-management {
+  margin-top: 120px;
+}
+.file-management__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 /*# sourceMappingURL=main.css.map */

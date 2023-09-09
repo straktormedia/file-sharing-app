@@ -7,52 +7,68 @@
     <link rel="stylesheet" href="src/css/main.css" />
   </head>
   <body>
-    <div class="logout">
-      <form action="logout.php" method="post">
-        <input type="submit" value="Logout" />
-      </form>
-    </div>
-
-    <section>
-      <h1>Welcome <span id="usernamePlaceholder">Regular User</span></h1>
-    </section>
-
-    <!-- Profile -->
-    <section id="profile">
-      <h2>Profile</h2>
-      <!-- User profile information here -->
-    </section>
-
-    <!-- File Management -->
-    <section id="file-management">
-      <h2>Upload a File</h2>
-      <!-- File upload form -->
-      <form id="file-upload-form">
-        <input
-          file-input
-          type="file"
-          id="file-input"
-          accept=".pdf, .doc, .jpg, .png"
-          required
-        />
-        <button upload-btn>Upload File</button>
-        <div data-container="progress">
-          <div data-progress="bar"></div>
-          <span data-progress="text">0%</span>
+    <main class="main">
+      <header class="header">
+        <div class="header__container boxed centered">
+          <p>
+            Welcome <b><span id="usernamePlaceholder"></b> </span>
+          </p>
+          <div class="logout">
+            <form action="logout.php" method="post">
+              <input type="submit" value="Logout" class="logout__input" />
+            </form>
+          </div>
         </div>
-      </form>
+      </header>
 
-      <!-- Display list of uploaded files -->
-      <h2>My Files</h2>
-      <div id="file-list">
-        <!-- File entries will be dynamically added here -->
-      </div>
-      <dialog id="shareDialog">
-        <p>Shareable Link:</p>
-        <input id="shareableLinkInput" type="text" readonly />
-        <button id="closeShareDialog">Close</button>
-      </dialog>
-    </section>
+      <!-- Profile -->
+      <!-- <section id="profile" class="profile" >
+        <div class="profile__container boxed centered">
+
+          <h2>Profile</h2>
+        </div>
+      </section> -->
+
+      <!-- File Management -->
+      <section id="file-management" class="file-management">
+        <div class="file-management__container boxed centered">
+
+          <div class="file-management__upload">
+
+            <h2>Upload a File</h2>
+            <!-- File upload form -->
+            <form id="file-upload-form">
+              <input
+                file-input
+                type="file"
+                id="file-input"
+                accept=".pdf, .doc, .jpg, .png"
+                required
+              />
+              <button upload-btn>Upload File</button>
+              <div data-container="progress">
+                <div data-progress="bar"></div>
+                <!-- <span data-progress="text">0%</span> -->
+              </div>
+            </form>
+          </div>
+  
+          <div class="file-management__view">
+
+            <!-- Display list of uploaded files -->
+            <h2>My Files</h2>
+            <div id="file-list">
+              <!-- File entries will be dynamically added here -->
+            </div>
+            <dialog id="shareDialog">
+              <p>Shareable Link:</p>
+              <input id="shareableLinkInput" type="text" readonly />
+              <button id="closeShareDialog">Close</button>
+            </dialog>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <script>
       // Check if the user is authenticated (server-side session)
