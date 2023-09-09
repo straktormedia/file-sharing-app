@@ -4,14 +4,13 @@ A secure file sharing application using HTML, JavaScript, PHP, Mysql and a REST 
 
 ## Setup
 
-XAMPP
-<br>
-phpMyAdmin
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "file-sharing-app";
-<br>
+### XAMPP
+
+Creates a local Apache server with mySQL and phpMyAdmin. After installing and starting Apache and mySQL, open your browser and navigate to "localhost/file-sharing-app".
+
+### NPM (NodeJS)
+
+Installs external packages easily. We are using Sass. At the root of the project, run "npm i" on your terminal.
 
 ## TO-DO
 
