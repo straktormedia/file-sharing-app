@@ -26,3 +26,4 @@ Installs external packages easily. We are using Sass. At the root of the project
 3. Replace/Skip Message when uploading same file
 4. When user Registers, redirect to Login
 5. When user is logged in, redirect to dashboard
+6. Understand & Refactor

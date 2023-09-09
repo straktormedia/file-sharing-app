@@ -7,25 +7,67 @@
     <link rel="stylesheet" href="src/css/main.css" />
   </head>
   <body>
-    <!-- Menu -->
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#login">Login</a></li>
-        <li><a href="#register">Register</a></li>
-        <li><a href="#profile">Profile</a></li>
-        <li><a href="#file-management">File Management</a></li>
-      </ul>
-    </nav>
-    <!-- Add this button where you want the "Logout" action -->
-    <form action="logout.php" method="post">
-      <input type="submit" value="Logout" />
-    </form>
+    <header class="header">
+      <div class="header__container boxed centered">
+        <p>
+          Welcome, <b><span id="usernamePlaceholder"></b></span>
+        </p>
+        <h1 class="boxed centered logo">File Sharing App 📄 → ☁️</h1>
+        <div class="logout">
+          <form action="logout.php" method="post">
+            <input type="submit" value="Logout" class="logout__input" />
+          </form>
+        </div>
+      </div>
+    </header>
+    <main class="main">
+   
 
-    <section>
-      <h1>Welcome Admin</h1>
+     <!-- File Management -->
+     <section id="file-management" class="file-management">
+      <div class="file-management__container boxed centered two-col">
+
+        <div class="file-management__upload component">
+
+          <h2>Upload a File</h2>
+          <!-- File upload form -->
+          <form id="file-upload-form" class="file-upload-form">
+            <input
+              file-input
+              type="file"
+              id="file-input"
+              accept=".pdf, .doc, .jpg, .png"
+              required
+              class="file-upload-form__input"
+            />
+            <button upload-btn class="button file-upload-form__button">Upload File</button>
+            <div data-container="progress">
+              <div data-progress="bar"></div>
+              <!-- <span data-progress="text">0%</span> -->
+            </div>
+          </form>
+        </div>
+
+        <div class="file-management__view component">
+
+          <!-- Display list of uploaded files -->
+          <h2 class="heading ">My Files</h2>
+          <div id="file-list" class="file-list">
+            <!-- File entries will be dynamically added here -->
+          </div>
+          <dialog id="shareDialog" class="share-link-modal">
+            <div class="share-link-modal__header">
+              <p>Shareable Link:</p>
+              <button id="closeShareDialog" class="button-small">❌</button>
+            </div>
+              <input id="shareableLinkInput" type="text" readonly class="share-link-modal__link" />
+             
+         
+          </dialog>
+        </div>
+      </div>
     </section>
-
+    </main>
     <script>
       // Check if the user is authenticated (server-side session)
       const checkAuthentication = async () => {
