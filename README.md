@@ -20,7 +20,9 @@ Installs external packages easily. We are using Sass. At the root of the project
 
 ## TO-DO
 
-1. Progress Bar
-2. Replace/Skip Message when uploading same file
-3. When user Registers, redirect to Login
-4. When user is logged in, redirect to dashboard
+0. Admin Access and UI
+1. Form Data Validation
+2. Progress Bar
+3. Replace/Skip Message when uploading same file
+4. When user Registers, redirect to Login
+5. When user is logged in, redirect to dashboard
