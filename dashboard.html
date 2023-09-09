@@ -17,12 +17,36 @@
         <li><a href="#file-management">File Management</a></li>
       </ul>
     </nav>
+    <!-- Add this button where you want the "Logout" action -->
+    <form action="logout.php" method="post">
+      <input type="submit" value="Logout" />
+    </form>
 
     <section>
       <h1>Welcome</h1>
     </section>
 
-    <!-- 
-    <script src="src/js/script.js"></script> -->
+    <script>
+      // Check if the user is authenticated (server-side session)
+      const checkAuthentication = async () => {
+        try {
+          const response = await fetch(
+            "http://localhost/file-sharing-app/authentication.php"
+          );
+          console.log(response);
+
+          if (!response.ok) {
+            // If not authenticated, redirect to the login page or display a message
+            window.location.href = "index.html";
+            // console.log("Go back");
+          }
+        } catch (error) {
+          console.error("Authentication check failed: " + error.message);
+        }
+      };
+
+      // Call the async function to check authentication
+      checkAuthentication();
+    </script>
   </body>
 </html>
