@@ -43,9 +43,15 @@ const listFiles = async () => {
     );
     if (response.ok) {
       const data = await response.json();
+      console.log(data);
       if (data.success) {
         const fileList = document.getElementById("file-list");
 
+        // Reset UI
+        const existingFiles = fileList.querySelectorAll("div");
+        if (existingFiles) existingFiles.forEach((file) => file.remove());
+
+        // Populate "file-list" element
         if (data.files.length > 0) {
           data.files.forEach((file) => {
             const fileEntry = document.createElement("div");
@@ -68,6 +74,8 @@ const listFiles = async () => {
   }
 };
 
+listFiles();
+
 // Handle Upload Button
 uploadButton.addEventListener("click", async (e) => {
   e.preventDefault();
@@ -81,7 +89,7 @@ uploadButton.addEventListener("click", async (e) => {
 
     try {
       await uploadFile(formData);
-      //   await listFiles();
+      await listFiles();
     } catch (error) {
       console.error("An error occurred during file upload:", error);
     }

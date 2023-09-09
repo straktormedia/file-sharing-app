@@ -8,7 +8,7 @@ if (isset($_FILES['file'])) {
     // Get the user's ID or username from your authentication system
     $userId = $_SESSION['user_id']; // You can replace this with your actual user ID retrieval logic
     // Alternatively, you can use the username:
-    // $username = $_SESSION['username'];
+    $username = $_SESSION['username'];
 
     // Create a folder for the user if it doesn't exist
     $userUploadDirectory = "../uploads/user_$userId/"; // Modify the folder structure as needed
@@ -21,6 +21,29 @@ if (isset($_FILES['file'])) {
     if (move_uploaded_file($file['tmp_name'], $userUploadDirectory . $file['name'])) {
         // File upload was successful
         $response = array('success' => true, 'message' => 'File uploaded successfully.');
+
+        // Insert file metadata into the database
+    $conn = new mysqli("localhost", "root", "", "file-sharing-app");
+    if ($conn->connect_error) {
+        // Handle database connection error
+        $response = array('success' => false, 'message' => 'Database connection failed.');
+    } else {
+        // Prepare and execute the SQL query to insert file metadata
+        $sql = "INSERT INTO uploaded_files (user_id, filename) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("is", $userId, $file['name']); // Change this line to use the original filename
+
+        if ($stmt->execute()) {
+            $response = array('success' => true, 'message' => 'File uploaded successfully.');
+        } else {
+            // Handle database insert error
+            $response = array('success' => false, 'message' => 'File metadata insertion failed.');
+        }
+
+        $stmt->close();
+        $conn->close();
+    }
+        
     } else {
         // File upload failed
         $response = array('success' => false, 'message' => 'File upload failed.');
