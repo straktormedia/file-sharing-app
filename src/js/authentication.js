@@ -1,6 +1,9 @@
 /////////////////////////////////////////////////////
 // Register
+const registrationSection = document.getElementById("register");
 const registrationForm = document.getElementById("registration-form");
+const successModal = document.getElementById("success-modal");
+const closeSuccessModal = document.getElementById("close-success-modal");
 
 registrationForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -12,16 +15,28 @@ registrationForm.addEventListener("submit", async (e) => {
   const confirmPassword = document.getElementById("confirm-password").value;
   const role = document.getElementById("role").value;
 
-  /*
-  if (// Add your validation logic here ) {
-    // Display validation errors to the user
-    // Example: document.getElementById("error-message").textContent = "Invalid input";
+  // Data validation
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  if (!password.match(passwordRegex)) {
+    alert(
+      "Password must be at least 8 characters and contain at least one letter and one number."
+    );
     return;
   }
-  */
+
+  if (password !== confirmPassword) {
+    alert("Password and Confirm Password must match.");
+    return;
+  }
+
+  // Email validation with RegEx
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    alert("Invalid email address format.");
+    return;
+  }
 
   // If validation passes, send the data to the server
-
   const requestBody = `username=${username}&email=${email}&password=${password}&confirm-password=${confirmPassword}&role=${role}`;
 
   try {
@@ -40,7 +55,8 @@ registrationForm.addEventListener("submit", async (e) => {
       const data = await response.json();
       if (data.success) {
         // Registration successful, display success message
-        console.log("Registration successful");
+        successModal.showModal();
+        registrationSection.classList.add("hidden");
       } else {
         // Registration failed, display error message
         console.error("Registration failed: " + data.message);
@@ -53,6 +69,11 @@ registrationForm.addEventListener("submit", async (e) => {
     // Handle network errors
     console.error("Network error occurred: " + error.message);
   }
+});
+
+// Close the success modal when the "Close" button is clicked
+closeSuccessModal.addEventListener("click", () => {
+  successModal.close();
 });
 
 // Login

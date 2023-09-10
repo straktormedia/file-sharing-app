@@ -18,7 +18,7 @@ const uploadFile = async (formData) => {
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
 
       if (data.success) {
         // Handle successful upload, e.g., display a success message
@@ -89,10 +89,10 @@ const listFiles = async () => {
             uploadedBy.innerHTML = `<span>Uploaded by:</span><span> <b> ${file.username} </b></span>`;
 
             // Append buttons to file entry
+            buttonsContainer.appendChild(uploadedBy);
             buttonsContainer.appendChild(shareButton);
             buttonsContainer.appendChild(downloadButton);
             buttonsContainer.appendChild(deleteButton);
-            buttonsContainer.appendChild(uploadedBy);
 
             if (fileListOthers) fileListOthers.appendChild(fileEntry);
           });

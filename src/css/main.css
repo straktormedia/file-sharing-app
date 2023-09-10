@@ -8,6 +8,7 @@ body,
 input,
 select {
   border: solid 1px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
   min-width: 300px;
   min-height: 24px;
   padding: 4px;
@@ -25,6 +26,10 @@ select {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
+}
+
+.hidden {
+  display: none;
 }
 
 .logo {
@@ -173,7 +178,7 @@ select {
 }
 .file-management__view--all .file-list__buttons-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 3fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -30,7 +30,4 @@ Installs external packages easily. We are using Sass. At the root of the project
 1. Form Data Validation
 2. Progress Bar
 3. Replace/Skip Message when uploading same file
-4. Password Confirm Match
-5. When user Registers, redirect to Login
-6. When user is logged in, redirect to dashboard
-7. Understand & Refactor
+4. Understand & Refactor
