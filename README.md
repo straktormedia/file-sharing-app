@@ -13,6 +13,7 @@ I used some of my common SCSS practices.
 First time building backend, I used GPT, and then studying the answer to understand. Definetely learned a lot on the process.
 Struggling with PHP syntax and Database interactions.
 Things to do better: One dashboard with limited stuff for users.
+No experience at all in security.
 
 ## Setup Instructions
 
@@ -26,8 +27,8 @@ Installs external packages easily. We are using Sass. At the root of the project
 
 ## TO-DO
 
-0. Admin Access and UI
-1. Form Data Validation
+0. Permissions to specific users
+1. User Profile
 2. Progress Bar
 3. Replace/Skip Message when uploading same file
 4. Understand & Refactor
