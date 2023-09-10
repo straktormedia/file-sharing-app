@@ -1,33 +1,29 @@
 const profileUsername = document.querySelector("[data-profile-username]");
 const profileEmail = document.querySelector("[data-profile-email]");
 
-// Get username
-const updateUsername = async () => {
+// Get user data
+const getUserData = async () => {
   try {
     const response = await fetch(
-      "http://localhost/file-sharing-app/api/get_username.php"
+      "http://localhost/file-sharing-app/api/get_user_data.php"
     );
 
     if (response.ok) {
       const data = await response.json();
-      if (data.success && data.username) {
-        // Update the username placeholder
-        const usernamePlaceholder = document.getElementById(
-          "usernamePlaceholder"
-        );
-        usernamePlaceholder.textContent = data.username;
-
+      if (data.success) {
+        // Update the profile details with user data
         profileUsername.textContent = data.username;
+        profileEmail.textContent = data.email; // Display the email
       }
     } else {
-      console.error("Failed to fetch username:", response.status);
+      console.error("Failed to fetch user data:", response.status);
     }
   } catch (error) {
     console.error(
-      "Network error occurred while fetching username:",
+      "Network error occurred while fetching user data:",
       error.message
     );
   }
 };
 
-updateUsername();
+getUserData();

@@ -14,6 +14,7 @@ First time building backend, I used GPT, and then studying the answer to underst
 Struggling with PHP syntax and Database interactions.
 Things to do better: One dashboard with limited stuff for users.
 No experience at all in security.
+get_username.php and get_user_data.php could be one file.
 
 ## Setup Instructions
 
