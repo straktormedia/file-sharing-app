@@ -131,6 +131,9 @@ select {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.3);
 }
+.file-list__item:last-child:after {
+  height: 0;
+}
 .file-list__buttons-container {
   display: flex;
   gap: 8px;
