@@ -35,8 +35,10 @@
         <div class="file-management__container boxed centered two-col">
 
           <div class="file-management__upload component">
-
             <h2>Upload File</h2>
+            <p class="text-small">Accepted Formats: .pdf, .doc, .jpg, .png.</p>
+            
+           
             <!-- File upload form -->
             <form id="file-upload-form" class="file-upload-form">
               <input
@@ -47,6 +49,7 @@
                 required
                 class="file-upload-form__input"
               />
+              
               <button upload-btn class="button file-upload-form__button">Upload</button>
               <div data-container="progress">
                 <div data-progress="bar"></div>

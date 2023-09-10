@@ -37,6 +37,7 @@
           <div class="file-management__upload component">
 
             <h2>Upload File</h2>
+            <p class="text-small">Accepted Formats: .pdf, .doc, .jpg, .png.</p>
             <!-- File upload form -->
             <form id="file-upload-form" class="file-upload-form">
               <input
@@ -106,6 +107,18 @@
             // If not authenticated, redirect to the login page or display a message
             window.location.href = "index.html";
             // console.log("Go back");
+          }
+
+          else {
+            // User is authenticated, now check their role
+            const roleResponse = await fetch(
+              "http://localhost/file-sharing-app/authorization.php"
+            );
+            const roleData = await roleResponse.json();
+
+            if (roleData.role === "admin") {
+              window.location.href = "admin-dashboard.html"; // Redirect if not an admin
+            }
           }
         } catch (error) {
           console.error("Authentication check failed: " + error.message);

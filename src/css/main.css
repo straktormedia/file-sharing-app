@@ -102,6 +102,10 @@ select {
   margin-top: 120px;
 }
 
+.text-small {
+  font-size: 12px;
+}
+
 .logout {
   justify-self: end;
 }
