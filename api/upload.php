@@ -5,10 +5,10 @@ session_start();
 if (isset($_FILES['file'])) {
     $file = $_FILES['file'];
 
-    // Get the user's ID or username from your authentication system
+    // Get the user's ID, role, and username from your authentication system
     $userId = $_SESSION['user_id']; // You can replace this with your actual user ID retrieval logic
-    // Alternatively, you can use the username:
-    $username = $_SESSION['username'];
+    $userRole = $_SESSION['role']; // Retrieve the user's role
+    $username = $_SESSION['username']; // Retrieve the username
 
     // Create a folder for the user if it doesn't exist
     $userUploadDirectory = "../uploads/user_$userId/"; // Modify the folder structure as needed
@@ -29,10 +29,10 @@ if (isset($_FILES['file'])) {
             $response = array('success' => false, 'message' => 'Database connection failed.');
         } else {
             // Prepare and execute the SQL query to insert file metadata
-            $sql = "INSERT INTO uploaded_files (user_id, filename, file_path) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO uploaded_files (user_id, username, filename, file_path, user_role) VALUES (?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
             $file_path = $userUploadDirectory . $file['name']; // Absolute file path
-            $stmt->bind_param("iss", $userId, $file['name'], $file_path); // Use the original filename and absolute file path
+            $stmt->bind_param("issss", $userId, $username, $file['name'], $file_path, $userRole); // Use the original filename, absolute file path, username, and user role
     
             if ($stmt->execute()) {
                 $response = array('success' => true, 'message' => 'File uploaded successfully.');
@@ -56,5 +56,4 @@ if (isset($_FILES['file'])) {
 // Send a JSON response
 header('Content-Type: application/json');
 echo json_encode($response);
-
 ?>

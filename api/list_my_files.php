@@ -17,7 +17,9 @@ if ($conn->connect_error) {
 
 $user_id = $_SESSION["user_id"];
 
-$sql = "SELECT id, filename FROM uploaded_files WHERE user_id = $user_id";
+$sql = "SELECT f.id, f.filename, u.username, u.role FROM uploaded_files f
+        INNER JOIN users u ON f.user_id = u.id
+        WHERE f.user_id = $user_id";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -25,7 +27,9 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $files[] = array(
             'id' => $row['id'],
-            'filename' => $row['filename']
+            'filename' => $row['filename'],
+            'username' => $row['username'],
+            'user_role' => $row['role']
         );
     }
     echo json_encode(array('success' => true, 'files' => $files));

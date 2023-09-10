@@ -16,8 +16,36 @@
     </header>
     <main class="main boxed centered">
       <section class="login-register two-col">
+        <!-- Login -->
+        <div id="login" class="component">
+          <p>Already have an account?</p>
+          <h2>Login</h2>
+          <form id="login-form" class="login-form">
+            <label for="login-username">Username:</label>
+            <input
+              type="text"
+              id="login-username"
+              name="login-username"
+              required
+            />
+
+            <label for="login-password">Password:</label>
+            <input
+              type="password"
+              id="login-password"
+              name="login-password"
+              required
+            />
+
+            <button type="submit" class="button login-form__button">
+              Login
+            </button>
+          </form>
+        </div>
+
         <!-- Register -->
         <div id="register" class="component">
+          <p>Don't have an account?</p>
           <h2>Sign Up</h2>
           <form id="registration-form" class="registration-form">
             <label for="username">Username:</label>
@@ -47,36 +75,9 @@
             </button>
           </form>
         </div>
-
-        <!-- Login -->
-        <div id="login" class="component">
-          <p>Already have an account?</p>
-          <h2>Login</h2>
-          <form id="login-form" class="login-form">
-            <label for="login-username">Username:</label>
-            <input
-              type="text"
-              id="login-username"
-              name="login-username"
-              required
-            />
-
-            <label for="login-password">Password:</label>
-            <input
-              type="password"
-              id="login-password"
-              name="login-password"
-              required
-            />
-
-            <button type="submit" class="button login-form__button">
-              Login
-            </button>
-          </form>
-        </div>
       </section>
     </main>
 
-    <script src="src/js/script.js"></script>
+    <script src="src/js/authentication.js"></script>
   </body>
 </html>

@@ -21,53 +21,79 @@
       </div>
     </header>
     <main class="main">
-   
 
-     <!-- File Management -->
-     <section id="file-management" class="file-management">
-      <div class="file-management__container boxed centered two-col">
+      <!-- Profile -->
+      <!-- <section id="profile" class="profile" >
+        <div class="profile__container boxed centered">
 
-        <div class="file-management__upload component">
-
-          <h2>Upload a File</h2>
-          <!-- File upload form -->
-          <form id="file-upload-form" class="file-upload-form">
-            <input
-              file-input
-              type="file"
-              id="file-input"
-              accept=".pdf, .doc, .jpg, .png"
-              required
-              class="file-upload-form__input"
-            />
-            <button upload-btn class="button file-upload-form__button">Upload File</button>
-            <div data-container="progress">
-              <div data-progress="bar"></div>
-              <!-- <span data-progress="text">0%</span> -->
-            </div>
-          </form>
+          <h2>Profile</h2>
         </div>
+      </section> -->
 
-        <div class="file-management__view component">
+      <!-- File Management -->
+      <section id="file-management" class="file-management">
+        <div class="file-management__container boxed centered two-col">
 
-          <!-- Display list of uploaded files -->
-          <h2 class="heading ">My Files</h2>
-          <div id="file-list" class="file-list">
-            <!-- File entries will be dynamically added here -->
+          <div class="file-management__upload component">
+
+            <h2>Upload File</h2>
+            <!-- File upload form -->
+            <form id="file-upload-form" class="file-upload-form">
+              <input
+                file-input
+                type="file"
+                id="file-input"
+                accept=".pdf, .doc, .jpg, .png"
+                required
+                class="file-upload-form__input"
+              />
+              <button upload-btn class="button file-upload-form__button">Upload</button>
+              <div data-container="progress">
+                <div data-progress="bar"></div>
+                <!-- <span data-progress="text">0%</span> -->
+              </div>
+            </form>
           </div>
-          <dialog id="shareDialog" class="share-link-modal">
-            <div class="share-link-modal__header">
-              <p>Shareable Link:</p>
-              <button id="closeShareDialog" class="button-small">❌</button>
+  
+          <div class="file-management__view component">
+
+            <!-- Display list of uploaded files -->
+            <h2 class="heading ">My Files</h2>
+            <div id="file-list" class="file-list">
+              <!-- File entries will be dynamically added here -->
             </div>
-              <input id="shareableLinkInput" type="text" readonly class="share-link-modal__link" />
-             
-         
-          </dialog>
+            <dialog id="shareDialog" class="share-link-modal">
+              <div class="share-link-modal__header">
+                <p>Shareable Link:</p>
+                <button id="closeShareDialog" class="button-small">❌</button>
+              </div>
+                <input id="shareableLinkInput" type="text" readonly class="share-link-modal__link" />
+               
+           
+            </dialog>
+          </div>
+
+          <div class="file-management__view component">
+
+            <!-- Display list of uploaded files -->
+            <h2 class="heading ">Files by other Users</h2>
+            <div id="file-list-others" class="file-list">
+              <!-- File entries will be dynamically added here -->
+            </div>
+            <dialog id="shareDialog" class="share-link-modal">
+              <div class="share-link-modal__header">
+                <p>Shareable Link:</p>
+                <button id="closeShareDialog" class="button-small">❌</button>
+              </div>
+                <input id="shareableLinkInput" type="text" readonly class="share-link-modal__link" />
+               
+           
+            </dialog>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
     </main>
+
     <script>
       // Check if the user is authenticated (server-side session)
       const checkAuthentication = async () => {
@@ -77,25 +103,19 @@
           );
 
           if (!response.ok) {
+            // If not authenticated, redirect to the login page or display a message
             window.location.href = "index.html";
-          } else {
-            // User is authenticated, now check their role
-            const roleResponse = await fetch(
-              "http://localhost/file-sharing-app/authorization.php"
-            );
-            const roleData = await roleResponse.json();
-
-            if (roleData.role !== "admin") {
-              window.location.href = "access-denied.html"; // Redirect if not an admin
-            }
+            // console.log("Go back");
           }
         } catch (error) {
           console.error("Authentication check failed: " + error.message);
         }
       };
 
-      // Call the async function to check authentication and role
+      // Call the async function to check authentication
       checkAuthentication();
     </script>
+
+    <script src="src/js/upload.js"></script>
   </body>
 </html>
