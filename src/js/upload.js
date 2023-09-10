@@ -45,12 +45,14 @@ const listFiles = async () => {
       const data = await response.json();
 
       if (data.success) {
-        const fileList = document.getElementById("file-list");
         const fileListOthers = document.getElementById("file-list-others");
 
         // Reset UI
-        const existingFiles = fileList.querySelectorAll("div");
-        if (existingFiles) existingFiles.forEach((file) => file.remove());
+        const existingFiles = fileListOthers.querySelectorAll("div");
+        if (existingFiles) {
+          existingFiles.forEach((file) => file.remove());
+          // fileListOthers.textContent = "No files uploaded yet.";
+        }
 
         // Populate "file-list" and "file-list-others" elements
         if (data.files.length > 0) {
@@ -82,33 +84,22 @@ const listFiles = async () => {
             deleteButton.textContent = "Delete🗑️";
             deleteButton.addEventListener("click", () => handleDelete(file.id));
 
+            const uploadedBy = document.createElement("div");
+            uploadedBy.classList.add("uploaded-by");
+            uploadedBy.innerHTML = `<span>Uploaded by:</span><span> <b> ${file.username} </b></span>`;
+
             // Append buttons to file entry
             buttonsContainer.appendChild(shareButton);
             buttonsContainer.appendChild(downloadButton);
             buttonsContainer.appendChild(deleteButton);
+            buttonsContainer.appendChild(uploadedBy);
 
-            // console.log(file);
             if (fileListOthers) fileListOthers.appendChild(fileEntry);
-
-            // if (file.user_role === "user") {
-            //   // Display files under "My Files" for "user"
-            //   fileList.appendChild(fileEntry);
-            // }
-
-            // if (file.user_role === "admin") {
-            //   // Display files under "My Files" for "admin"
-            //   fileList.appendChild(fileEntry);
-            // }
-
-            // if (file.user_role === "admin") {
-            //   // Display files under "Files by other Users" for "admin" only
-            //   fileListOthers.appendChild(fileEntry);
-            // }
           });
         } else {
           const noFilesMessage = document.createElement("p");
           noFilesMessage.textContent = "No files uploaded yet.";
-          fileList.appendChild(noFilesMessage);
+          fileListOthers.appendChild(noFilesMessage);
         }
       } else {
         console.error("Failed to fetch files:", data.message);
@@ -280,6 +271,7 @@ const handleDelete = async (fileId) => {
   if (response.ok) {
     // File deleted successfully, update the UI
     listFiles();
+    listMyFiles();
   } else {
     console.error("Failed to delete file:", response.statusText);
   }

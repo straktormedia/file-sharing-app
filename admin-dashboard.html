@@ -73,7 +73,7 @@
             </dialog>
           </div>
 
-          <div class="file-management__view component">
+          <div class="file-management__view file-management__view--all component">
 
             <!-- Display list of uploaded files -->
             <h2 class="heading ">Files by other Users</h2>
@@ -103,16 +103,24 @@
           );
 
           if (!response.ok) {
-            // If not authenticated, redirect to the login page or display a message
             window.location.href = "index.html";
-            // console.log("Go back");
+          } else {
+            // User is authenticated, now check their role
+            const roleResponse = await fetch(
+              "http://localhost/file-sharing-app/authorization.php"
+            );
+            const roleData = await roleResponse.json();
+
+            if (roleData.role !== "admin") {
+              window.location.href = "access-denied.html"; // Redirect if not an admin
+            }
           }
         } catch (error) {
           console.error("Authentication check failed: " + error.message);
         }
       };
 
-      // Call the async function to check authentication
+      // Call the async function to check authentication and role
       checkAuthentication();
     </script>
 

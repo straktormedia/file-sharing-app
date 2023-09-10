@@ -6,11 +6,13 @@ A secure file sharing application using HTML, JavaScript, PHP, Mysql and a REST 
 
 The steps followed to create this application are the following: <br>
 Basic Frontend, Database Setup, API, Connections, Refactoring, Polishing Frontend.
+Keeping notes here along the way.
 For now the files accepted are .pdf, .doc, .jpg, .png.
 I was adding columns to the database tables, while building the app.
 I used some of my common SCSS practices.
 First time building backend, I used GPT, and then studying the answer to understand. Definetely learned a lot on the process.
 Struggling with PHP syntax and Database interactions.
+Things to do better: One dashboard with limited stuff for users.
 
 ## Setup Instructions
 
