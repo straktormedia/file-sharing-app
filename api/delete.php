@@ -11,9 +11,6 @@ if (isset($_GET["id"])) {
     // Extract the file ID from the request
     $fileId = $_GET["id"];
 
-    // Get the user ID of the logged-in user
-    $userId = $_SESSION["user_id"];
-
     // Initialize a database connection
     $conn = new mysqli("localhost", "root", "", "file-sharing-app");
 
@@ -24,46 +21,58 @@ if (isset($_GET["id"])) {
         exit();
     }
 
-    // Query the database to get the filename associated with the file ID
-    $stmt = $conn->prepare("SELECT filename FROM uploaded_files WHERE id = ? AND user_id = ?");
-    $stmt->bind_param("ii", $fileId, $userId);
+    // Query the database to get the user ID of the uploader and the filename
+    $stmt = $conn->prepare("SELECT user_id, filename FROM uploaded_files WHERE id = ?");
+    $stmt->bind_param("i", $fileId);
     $stmt->execute();
-    $stmt->store_result();
+    $result = $stmt->get_result();
 
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($filename);
-        $stmt->fetch();
+    if ($result->num_rows > 0) {
+        $fileInfo = $result->fetch_assoc();
+        $uploaderUserId = $fileInfo['user_id'];
+        $filename = $fileInfo['filename'];
 
-        // Delete the file from the folder
-        $userUploadDirectory = "../uploads/user_$userId/";
-        $filePath = $userUploadDirectory . $filename;
+        // Get the user ID of the logged-in user
+        $loggedInUserId = $_SESSION["user_id"];
 
-        if (unlink($filePath)) {
-            // File deleted from the folder successfully
-            // Now, delete the file from the database
-            $stmt->close();
+        // Check if the logged-in user has the privilege to delete the file
+        // You can add additional logic here to determine the privileges, e.g., user roles
+        if ($uploaderUserId) {
+            // Delete the file from the folder
+            $userUploadDirectory = "../uploads/user_$uploaderUserId/";
+            $filePath = $userUploadDirectory . $filename;
 
-            $deleteStmt = $conn->prepare("DELETE FROM uploaded_files WHERE id = ? AND user_id = ?");
-            $deleteStmt->bind_param("ii", $fileId, $userId);
-            
-            if ($deleteStmt->execute()) {
-                // File deleted from the database successfully
-                $response = array('success' => true, 'message' => 'File deleted successfully.');
+            if (unlink($filePath)) {
+                // File deleted from the folder successfully
+                // Now, delete the file from the database
+                $stmt->close();
+
+                $deleteStmt = $conn->prepare("DELETE FROM uploaded_files WHERE id = ?");
+                $deleteStmt->bind_param("i", $fileId);
+
+                if ($deleteStmt->execute()) {
+                    // File deleted from the database successfully
+                    $response = array('success' => true, 'message' => 'File deleted successfully.');
+                } else {
+                    // Handle database deletion error
+                    $response = array('success' => false, 'message' => 'Failed to delete file from the database.');
+                }
+
+                $deleteStmt->close();
             } else {
-                // Handle database deletion error
-                $response = array('success' => false, 'message' => 'Failed to delete file from the database.');
+                // Handle file deletion from folder error
+                $response = array('success' => false, 'message' => 'Failed to delete file from the folder.');
             }
-
-            $deleteStmt->close();
         } else {
-            // Handle file deletion from folder error
-            $response = array('success' => false, 'message' => 'Failed to delete file from the folder.');
+            // Unauthorized: The logged-in user doesn't have permission to delete this file
+            $response = array('success' => false, 'message' => 'Unauthorized to delete this file.');
         }
     } else {
-        // File with the specified ID doesn't belong to the user
-        $response = array('success' => false, 'message' => 'File not found or unauthorized.');
+        // File with the specified ID doesn't exist
+        $response = array('success' => false, 'message' => 'File not found.');
     }
 
+    $stmt->close();
     $conn->close();
 } else {
     // File ID was not provided in the request
@@ -73,4 +82,5 @@ if (isset($_GET["id"])) {
 // Send a JSON response
 header('Content-Type: application/json');
 echo json_encode($response);
+
 ?>
