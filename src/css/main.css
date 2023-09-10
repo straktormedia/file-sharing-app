@@ -54,6 +54,7 @@ a {
 }
 
 .button-small {
+  min-width: 100px;
   outline: none;
   border: solid 1px;
   border-radius: 4px;
@@ -199,9 +200,11 @@ a {
 .file-management__view--all {
   grid-column: span 2;
 }
+.file-management__view--all .file-list__item {
+  display: block;
+}
 .file-management__view--all .file-list__buttons-container {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  display: flex;
 }
 
 .profile__details {

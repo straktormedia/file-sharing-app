@@ -104,6 +104,9 @@ loginForm.addEventListener("submit", async (e) => {
     if (response.ok) {
       const data = await response.json();
       if (data.success) {
+        window.location.href = "admin-dashboard.html";
+
+        /*
         // Check the user's role
         const userRole = data.role;
         if (userRole === "user") {
@@ -116,6 +119,7 @@ loginForm.addEventListener("submit", async (e) => {
           // Handle unknown role
           console.error("Unknown user role: " + userRole);
         }
+        */
       } else {
         // Login failed, display error message
         console.error("Login failed: " + data.message);

@@ -99,6 +99,7 @@
 
     <script>
       // Check if the user is authenticated (server-side session)
+
       const checkAuthentication = async () => {
         try {
           const response = await fetch(
@@ -107,7 +108,11 @@
 
           if (!response.ok) {
             window.location.href = "index.html";
-          } else {
+          }
+
+          /*
+          else {
+            
             // User is authenticated, now check their role
             const roleResponse = await fetch(
               "http://localhost/file-sharing-app/authorization.php"
@@ -117,7 +122,9 @@
             if (roleData.role !== "admin") {
               window.location.href = "access-denied.html"; // Redirect if not an admin
             }
+            
           }
+          */
         } catch (error) {
           console.error("Authentication check failed: " + error.message);
         }

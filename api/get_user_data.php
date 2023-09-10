@@ -19,11 +19,12 @@ if (isset($_SESSION["username"])) {
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
-        // You can retrieve additional user data here
+        // Retrieve user data, including the role
         $email = $row["email"];
+        $role = $row["role"];
 
-        // Send a success JSON response with user data
-        echo json_encode(array('success' => true, 'username' => $username, 'email' => $email));
+        // Send a success JSON response with user data and role
+        echo json_encode(array('success' => true, 'username' => $username, 'email' => $email, 'role' => $role));
     } else {
         // Send an error JSON response
         http_response_code(404); // Not Found

@@ -55,7 +55,7 @@ a {
 
 .button-small {
   // border: none;
-
+  min-width: 100px;
   outline: none;
   border: solid 1px;
   border-radius: 4px;
@@ -172,6 +172,10 @@ a {
       bottom: 0;
       background-color: rgba(0, 0, 0, 0.3);
     }
+
+    // & * {
+    //   width: 100%;
+    // }
   }
 
   &__item:last-child {
@@ -218,9 +222,14 @@ a {
     &--all {
       grid-column: span 2;
 
+      & .file-list__item {
+        display: block;
+      }
+
       & .file-list__buttons-container {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1fr;
+        display: flex;
+        // display: grid;
+        // grid-template-columns: 4fr 1fr 1fr 1fr;
       }
     }
   }
