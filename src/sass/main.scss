@@ -138,6 +138,20 @@ a {
   }
 }
 
+.progress {
+  width: 0%;
+  &__bar {
+    height: 4px;
+    background-color: green;
+    margin-top: 8px;
+  }
+
+  &__text {
+    display: block;
+    text-align: right;
+  }
+}
+
 .file-list {
   margin-top: 20px;
   max-height: 300px;
@@ -193,6 +207,7 @@ a {
 }
 
 .file-upload-form {
+  justify-content: revert;
   &__input {
     border: none;
   }

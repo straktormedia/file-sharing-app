@@ -20,6 +20,9 @@ Register has data validation and checks if the username or the email exists in t
 The password is encrypted.
 Each user role has a different dashboard and permissions.
 Existing email/username on registration is not working correctly.
+Progress bar is giving an error althought it works.
+Some errors come with alert because of no time.
+Profile is at Welcome on the top left side.
 
 ## Setup Instructions
 
@@ -34,6 +37,4 @@ Installs external packages easily. We are using Sass. At the root of the project
 ## TO-DO
 
 1. Permissions to specific users
-2. Progress Bar
-3. Replace/Skip Message when uploading same file
-4. Understand & Refactor
+2. Understand & Refactor

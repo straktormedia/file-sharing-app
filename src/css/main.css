@@ -127,6 +127,19 @@ a {
   text-decoration: underline;
 }
 
+.progress {
+  width: 0%;
+}
+.progress__bar {
+  height: 4px;
+  background-color: green;
+  margin-top: 8px;
+}
+.progress__text {
+  display: block;
+  text-align: right;
+}
+
 .file-list {
   margin-top: 20px;
   max-height: 300px;
@@ -176,6 +189,9 @@ a {
   margin-top: 20px;
 }
 
+.file-upload-form {
+  justify-content: revert;
+}
 .file-upload-form__input {
   border: none;
 }

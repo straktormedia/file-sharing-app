@@ -1,9 +1,9 @@
 // Uploads
 const uploadButton = document.querySelector("[upload-btn]");
 const fileInput = document.querySelector("[file-input]");
-// const progressBar = document.querySelector('[data-progress="bar"]');
-// const progressText = document.querySelector('[data-progress="text"]');
-// const progressContainer = document.querySelector('[data-container="progress"]');
+const progressBar = document.querySelector('[data-progress="bar"]');
+const progressText = document.querySelector('[data-progress="text"]');
+const progressContainer = document.querySelector('[data-container="progress"]');
 
 // Upload File
 const uploadFile = async (formData) => {
@@ -16,19 +16,48 @@ const uploadFile = async (formData) => {
       }
     );
 
-    if (response.ok) {
-      const data = await response.json();
-      // console.log(data);
+    // Create a ReadableStream from the Response body
+    const reader = response.body.getReader();
+    const contentLength = +response.headers.get("Content-Length");
+    let receivedLength = 0; // To keep track of received bytes
 
+    // Define a function to read and process the stream
+    async function readStream() {
+      while (true) {
+        const { done, value } = await reader.read();
+
+        if (done) {
+          break;
+        }
+
+        // Process the received chunk here, if needed
+        // For progress tracking, you can update the progress bar
+        receivedLength += value.length;
+        const percentComplete = (receivedLength / contentLength) * 100;
+        console.log(`Upload progress: ${percentComplete.toFixed(2)}%`);
+
+        // Update the progress bar here
+        progressContainer.style.width = `${percentComplete.toFixed(2)}%`;
+        progressText.textContent = `${percentComplete.toFixed(2)}%`;
+      }
+    }
+
+    // Start reading the stream
+    await readStream();
+
+    if (!response.ok) {
+      // Handle upload error
+      console.error("File upload failed");
+    } else {
+      // Now, parse the response as JSON since it's successful
+      const data = await response.json();
       if (data.success) {
-        // Handle successful upload, e.g., display a success message
+        // Handle successful upload
         console.log("From upload.php: File uploaded successfully");
       } else {
-        // Handle upload error, e.g., display an error message
+        // Handle upload error
         console.error("File upload failed");
       }
-    } else {
-      throw new Error(`HTTP Error: ${response.status}`);
     }
   } catch (error) {
     console.error("An error occurred during file upload:", error);
@@ -336,6 +365,6 @@ uploadButton.addEventListener("click", async (e) => {
       console.error("An error occurred during file upload:", error);
     }
   } else {
-    console.error("No file selected for upload");
+    alert("No file selected for upload");
   }
 });
