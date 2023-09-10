@@ -16,6 +16,10 @@ Things to do better: One dashboard with limited stuff for users.
 No experience at all in security.
 get_username.php and get_user_data.php could be one file.
 
+Register has data validation and checks if the username or the email exists in the database.
+The password is encrypted.
+Each user role has a different dashboard and permissions.
+
 ## Setup Instructions
 
 ### XAMPP
@@ -28,8 +32,7 @@ Installs external packages easily. We are using Sass. At the root of the project
 
 ## TO-DO
 
-0. Permissions to specific users
-1. User Profile
+1. Permissions to specific users
 2. Progress Bar
 3. Replace/Skip Message when uploading same file
 4. Understand & Refactor

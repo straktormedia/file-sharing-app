@@ -53,6 +53,7 @@ registrationForm.addEventListener("submit", async (e) => {
 
     if (response.ok) {
       const data = await response.json();
+
       if (data.success) {
         // Registration successful, display success message
         successModal.showModal();
@@ -64,6 +65,7 @@ registrationForm.addEventListener("submit", async (e) => {
     } else {
       // Handle HTTP error responses
       console.error("HTTP Error: " + response.status);
+      alert("Username or email already exists!");
     }
   } catch (error) {
     // Handle network errors
