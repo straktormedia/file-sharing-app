@@ -31,6 +31,7 @@ No experience at all in security.
 
 ## Bugs
 
+display:none is not the best practice for not showing share,delete buttons
 get_username.php and get_user_data.php could be one file.
 Existing email/username on registration is not working correctly.
 Progress bar is giving an error althought it works.

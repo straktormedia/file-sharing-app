@@ -8,6 +8,85 @@ const progressBar = document.querySelector('[data-progress="bar"]');
 const progressText = document.querySelector('[data-progress="text"]');
 const progressContainer = document.querySelector('[data-container="progress"]');
 
+// Share
+const handleShare = async (fileId) => {
+  try {
+    const response = await fetch(
+      `http://localhost/file-sharing-app/api/share.php?id=${fileId}`
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      if (data.success) {
+        // Display the shareable link in the modal
+        const shareableLinkInput =
+          document.getElementById("shareableLinkInput");
+        shareableLinkInput.value = data.shareable_link;
+
+        // Show the modal
+        const shareDialog = document.getElementById("shareDialog");
+        shareDialog.showModal();
+      } else {
+        // Handle sharing error, e.g., display an error message
+        console.error(`File sharing failed: ${data.message}`);
+      }
+    } else {
+      // Handle HTTP error responses
+      console.error(`HTTP Error: ${response.status}`);
+    }
+  } catch (error) {
+    // Handle network errors
+    console.error(`Network error occurred: ${error.message}`);
+  }
+};
+
+// Download
+const handleDownload = async (fileId, filename) => {
+  try {
+    const response = await fetch(
+      `http://localhost/file-sharing-app/api/download.php?id=${fileId}`
+    );
+
+    if (response.ok) {
+      const blob = await response.blob();
+
+      // Log the blob size for debugging
+      console.log(blob.size);
+
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      URL.revokeObjectURL(blobUrl);
+    } else {
+      console.error("Failed to download file:", response.statusText);
+    }
+  } catch (error) {
+    console.error("Network error occurred:", error.message);
+  }
+};
+
+// Delete
+const handleDelete = async (fileId) => {
+  // Send a request to delete.php with the file ID
+  const response = await fetch(
+    `http://localhost/file-sharing-app/api/delete.php?id=${fileId}`,
+    {
+      method: "DELETE",
+    }
+  );
+
+  if (response.ok) {
+    // File deleted successfully, update the UI
+    listFiles();
+    listMyFiles();
+  } else {
+    console.error("Failed to delete file:", response.statusText);
+  }
+};
+
 const createFileEntry = (file, container, author = true, userRole) => {
   const fileEntry = document.createElement("div");
   fileEntry.classList.add("file-list__item");
@@ -210,85 +289,6 @@ const listFiles = async () => {
     }
   } catch (error) {
     console.error("Network error occurred:", error.message);
-  }
-};
-
-// Share
-const handleShare = async (fileId) => {
-  try {
-    const response = await fetch(
-      `http://localhost/file-sharing-app/api/share.php?id=${fileId}`
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      if (data.success) {
-        // Display the shareable link in the modal
-        const shareableLinkInput =
-          document.getElementById("shareableLinkInput");
-        shareableLinkInput.value = data.shareable_link;
-
-        // Show the modal
-        const shareDialog = document.getElementById("shareDialog");
-        shareDialog.showModal();
-      } else {
-        // Handle sharing error, e.g., display an error message
-        console.error(`File sharing failed: ${data.message}`);
-      }
-    } else {
-      // Handle HTTP error responses
-      console.error(`HTTP Error: ${response.status}`);
-    }
-  } catch (error) {
-    // Handle network errors
-    console.error(`Network error occurred: ${error.message}`);
-  }
-};
-
-// Download
-const handleDownload = async (fileId, filename) => {
-  try {
-    const response = await fetch(
-      `http://localhost/file-sharing-app/api/download.php?id=${fileId}`
-    );
-
-    if (response.ok) {
-      const blob = await response.blob();
-
-      // Log the blob size for debugging
-      console.log(blob.size);
-
-      const blobUrl = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = blobUrl;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      URL.revokeObjectURL(blobUrl);
-    } else {
-      console.error("Failed to download file:", response.statusText);
-    }
-  } catch (error) {
-    console.error("Network error occurred:", error.message);
-  }
-};
-
-// Delete
-const handleDelete = async (fileId) => {
-  // Send a request to delete.php with the file ID
-  const response = await fetch(
-    `http://localhost/file-sharing-app/api/delete.php?id=${fileId}`,
-    {
-      method: "DELETE",
-    }
-  );
-
-  if (response.ok) {
-    // File deleted successfully, update the UI
-    listFiles();
-    listMyFiles();
-  } else {
-    console.error("Failed to delete file:", response.statusText);
   }
 };
 
