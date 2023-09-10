@@ -19,6 +19,7 @@ get_username.php and get_user_data.php could be one file.
 Register has data validation and checks if the username or the email exists in the database.
 The password is encrypted.
 Each user role has a different dashboard and permissions.
+Existing email/username on registration is not working correctly.
 
 ## Setup Instructions
 
