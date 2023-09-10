@@ -18,8 +18,21 @@ a {
   color: black;
 }
 
+@media screen and (max-width: 992px) {
+  h1 {
+    font-size: 22px;
+  }
+}
+
 .boxed {
   max-width: 1200px;
+}
+
+@media screen and (max-width: 992px) {
+  .boxed {
+    max-width: revert;
+    padding: 0 20px;
+  }
 }
 
 .centered {
@@ -32,6 +45,12 @@ a {
   gap: 24px;
 }
 
+@media screen and (max-width: 992px) {
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
 .hidden {
   display: none;
 }
@@ -39,6 +58,13 @@ a {
 .logo {
   justify-self: center;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+@media screen and (max-width: 992px) {
+  .logo {
+    // grid-column: span 2;
+    order: 1;
+  }
 }
 
 .button {
@@ -115,6 +141,12 @@ a {
     &--login-register {
       grid-template-columns: revert;
     }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .header__container {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -232,6 +264,22 @@ a {
         // grid-template-columns: 4fr 1fr 1fr 1fr;
       }
     }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .file-management__view--all {
+    grid-column: revert;
+    max-width: revert;
+    padding: 0 20px;
+  }
+
+  .file-list__item {
+    display: block;
+  }
+
+  .file-list__buttons-container {
+    margin: 8px 0 8px;
   }
 }
 
