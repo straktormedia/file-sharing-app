@@ -27,6 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["username"] = $row["username"];
             $_SESSION["role"] = $row["role"]; // Include the role in the session
 
+            
+
             // Send a success JSON response with the role
             echo json_encode(array('success' => true, 'message' => 'Login successful', 'role' => $row["role"]));
         } else {

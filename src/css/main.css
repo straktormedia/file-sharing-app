@@ -14,6 +14,10 @@ select {
   padding: 4px;
 }
 
+a {
+  color: black;
+}
+
 .boxed {
   max-width: 1200px;
 }
@@ -182,6 +186,17 @@ select {
 .file-management__view--all .file-list__buttons-container {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
+}
+
+.profile__details {
+  margin-top: 20px;
+}
+
+.dashboard-link {
+  display: block;
+  font-weight: bold;
+  padding-bottom: 20px;
+  text-decoration: none;
 }
 
 /*# sourceMappingURL=main.css.map */

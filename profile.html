@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Sharing App</title>
+    <link rel="stylesheet" href="src/css/main.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header__container boxed centered">
+        <p>
+          Welcome,
+          <a href="profile.html"
+            ><b><span id="usernamePlaceholder"></span></b
+          ></a>
+        </p>
+        <h1 class="boxed centered logo">File Sharing App 📄 → ☁️</h1>
+        <div class="logout">
+          <form action="logout.php" method="post">
+            <input type="submit" value="Logout" class="logout__input" />
+          </form>
+        </div>
+      </div>
+    </header>
+    <main class="main">
+      <!-- File Management -->
+
+      <section id="file-management" class="file-management">
+        <div class="file-management__container boxed centered">
+          <a href="dashboard.html" class="dashboard-link"
+            >← Back to Dashboard</a
+          >
+          <div class="profile component">
+            <h2>Profile</h2>
+            <div class="profile__details">
+              <div>
+                <span>Username: </span><span data-profile-username></span>
+              </div>
+              <div><span>Email:</span><span data-profile-email></span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="src/js/profile.js"></script>
+  </body>
+</html>

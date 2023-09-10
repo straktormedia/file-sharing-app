@@ -10,7 +10,10 @@
     <header class="header">
       <div class="header__container boxed centered">
         <p>
-          Welcome, <b><span id="usernamePlaceholder"></b></span>
+          Welcome,
+          <a href="profile.html"
+            ><b><span id="usernamePlaceholder"></span></b
+          ></a>
         </p>
         <h1 class="boxed centered logo">File Sharing App 📄 → ☁️</h1>
         <div class="logout">
@@ -21,24 +24,13 @@
       </div>
     </header>
     <main class="main">
-
-      <!-- Profile -->
-      <!-- <section id="profile" class="profile" >
-        <div class="profile__container boxed centered">
-
-          <h2>Profile</h2>
-        </div>
-      </section> -->
-
       <!-- File Management -->
       <section id="file-management" class="file-management">
         <div class="file-management__container boxed centered two-col">
-
           <div class="file-management__upload component">
             <h2>Upload File</h2>
             <p class="text-small">Accepted Formats: .pdf, .doc, .jpg, .png.</p>
-            
-           
+
             <!-- File upload form -->
             <form id="file-upload-form" class="file-upload-form">
               <input
@@ -49,19 +41,20 @@
                 required
                 class="file-upload-form__input"
               />
-              
-              <button upload-btn class="button file-upload-form__button">Upload</button>
+
+              <button upload-btn class="button file-upload-form__button">
+                Upload
+              </button>
               <div data-container="progress">
                 <div data-progress="bar"></div>
                 <!-- <span data-progress="text">0%</span> -->
               </div>
             </form>
           </div>
-  
-          <div class="file-management__view component">
 
+          <div class="file-management__view component">
             <!-- Display list of uploaded files -->
-            <h2 class="heading ">My Files</h2>
+            <h2 class="heading">My Files</h2>
             <div id="file-list" class="file-list">
               <!-- File entries will be dynamically added here -->
             </div>
@@ -70,16 +63,20 @@
                 <p>Shareable Link:</p>
                 <button id="closeShareDialog" class="button-small">❌</button>
               </div>
-                <input id="shareableLinkInput" type="text" readonly class="share-link-modal__link" />
-               
-           
+              <input
+                id="shareableLinkInput"
+                type="text"
+                readonly
+                class="share-link-modal__link"
+              />
             </dialog>
           </div>
 
-          <div class="file-management__view file-management__view--all component">
-
+          <div
+            class="file-management__view file-management__view--all component"
+          >
             <!-- Display list of uploaded files -->
-            <h2 class="heading ">All Files</h2>
+            <h2 class="heading">All Files</h2>
             <div id="file-list-others" class="file-list">
               <!-- File entries will be dynamically added here -->
             </div>
@@ -88,9 +85,12 @@
                 <p>Shareable Link:</p>
                 <button id="closeShareDialog" class="button-small">❌</button>
               </div>
-                <input id="shareableLinkInput" type="text" readonly class="share-link-modal__link" />
-               
-           
+              <input
+                id="shareableLinkInput"
+                type="text"
+                readonly
+                class="share-link-modal__link"
+              />
             </dialog>
           </div>
         </div>
