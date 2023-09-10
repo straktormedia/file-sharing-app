@@ -97,43 +97,7 @@
       </section>
     </main>
 
-    <script>
-      // Check if the user is authenticated (server-side session)
-
-      const checkAuthentication = async () => {
-        try {
-          const response = await fetch(
-            "http://localhost/file-sharing-app/authentication.php"
-          );
-
-          if (!response.ok) {
-            window.location.href = "index.html";
-          }
-
-          /*
-          else {
-            
-            // User is authenticated, now check their role
-            const roleResponse = await fetch(
-              "http://localhost/file-sharing-app/authorization.php"
-            );
-            const roleData = await roleResponse.json();
-
-            if (roleData.role !== "admin") {
-              window.location.href = "access-denied.html"; // Redirect if not an admin
-            }
-            
-          }
-          */
-        } catch (error) {
-          console.error("Authentication check failed: " + error.message);
-        }
-      };
-
-      // Call the async function to check authentication and role
-      checkAuthentication();
-    </script>
-
-    <script src="src/js/upload.js"></script>
+    <script src="src/js/authentication.js"></script>
+    <script src="src/js/script.js"></script>
   </body>
 </html>

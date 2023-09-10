@@ -144,14 +144,20 @@ a {
   }
 }
 
+.main {
+  margin-top: 120px;
+  margin-bottom: 120px;
+}
+
 @media screen and (max-width: 992px) {
   .header__container {
     grid-template-columns: 1fr;
   }
-}
 
-.main {
-  margin-top: 120px;
+  .main {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
 }
 
 .text-small {

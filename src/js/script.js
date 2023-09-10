@@ -1,9 +1,62 @@
+// This file sends requests to the API which are the following file:
+// get_user_data.php, list_all_files.php, list_my_files.php, share.php, download.php, delete.php and get_username.php
+
 // Uploads
 const uploadButton = document.querySelector("[upload-btn]");
 const fileInput = document.querySelector("[file-input]");
 const progressBar = document.querySelector('[data-progress="bar"]');
 const progressText = document.querySelector('[data-progress="text"]');
 const progressContainer = document.querySelector('[data-container="progress"]');
+
+const createFileEntry = (file, container, author = true, userRole) => {
+  const fileEntry = document.createElement("div");
+  fileEntry.classList.add("file-list__item");
+  fileEntry.textContent = file.filename;
+
+  const buttonsContainer = document.createElement("div");
+  buttonsContainer.classList.add("file-list__buttons-container");
+  fileEntry.appendChild(buttonsContainer);
+
+  // Create buttons for delete, share, and download
+
+  const shareButton = document.createElement("button");
+  shareButton.classList.add("button-small");
+  shareButton.textContent = "Share🔗";
+  shareButton.addEventListener("click", () => handleShare(file.id));
+
+  const downloadButton = document.createElement("button");
+  downloadButton.classList.add("button-small");
+  downloadButton.textContent = "Download 📥";
+  downloadButton.addEventListener("click", () =>
+    handleDownload(file.id, file.filename)
+  );
+
+  const deleteButton = document.createElement("button");
+  deleteButton.classList.add("button-small");
+  deleteButton.textContent = "Delete🗑️";
+  deleteButton.addEventListener("click", () => handleDelete(file.id));
+
+  if (author) {
+    const uploadedBy = document.createElement("div");
+    uploadedBy.classList.add("uploaded-by");
+    uploadedBy.innerHTML = `<span>Uploaded by:</span><span> <b> ${file.username} </b></span>`;
+
+    // Append buttons to file entry
+    buttonsContainer.appendChild(uploadedBy);
+  }
+  buttonsContainer.appendChild(shareButton);
+  buttonsContainer.appendChild(downloadButton);
+  buttonsContainer.appendChild(deleteButton);
+
+  if (userRole === "user") {
+    // Hide buttons for "user"
+    // downloadButton.style.display = "none";
+    shareButton.style.display = "none";
+    deleteButton.style.display = "none";
+  }
+
+  if (container) container.appendChild(fileEntry);
+};
 
 // Upload File
 const uploadFile = async (formData) => {
@@ -64,78 +117,31 @@ const uploadFile = async (formData) => {
   }
 };
 
-/*
-// List Files
-const listFiles = async () => {
+// List User Files
+const listMyFiles = async () => {
   try {
     const response = await fetch(
-      "http://localhost/file-sharing-app/api/list_all_files.php"
+      "http://localhost/file-sharing-app/api/list_my_files.php"
     );
     if (response.ok) {
       const data = await response.json();
 
       if (data.success) {
-        const fileListOthers = document.getElementById("file-list-others");
+        const fileList = document.getElementById("file-list");
 
         // Reset UI
-        const existingFiles = fileListOthers.querySelectorAll("div");
-        if (existingFiles) {
-          existingFiles.forEach((file) => file.remove());
-          // fileListOthers.textContent = "No files uploaded yet.";
-        }
+        const existingFiles = fileList.querySelectorAll("div");
+        if (existingFiles) existingFiles.forEach((file) => file.remove());
 
         // Populate "file-list" and "file-list-others" elements
         if (data.files.length > 0) {
           data.files.forEach((file) => {
-            const fileEntry = document.createElement("div");
-            fileEntry.classList.add("file-list__item");
-            fileEntry.textContent = file.filename;
-
-            const buttonsContainer = document.createElement("div");
-            buttonsContainer.classList.add("file-list__buttons-container");
-            fileEntry.appendChild(buttonsContainer);
-
-            // Create buttons for delete, share, and download
-
-            const shareButton = document.createElement("button");
-            shareButton.classList.add("button-small");
-            shareButton.textContent = "Share🔗";
-            shareButton.addEventListener("click", () => handleShare(file.id));
-
-            const downloadButton = document.createElement("button");
-            downloadButton.classList.add("button-small");
-            downloadButton.textContent = "Download 📥";
-            downloadButton.addEventListener("click", () =>
-              handleDownload(file.id, file.filename)
-            );
-
-            const deleteButton = document.createElement("button");
-            deleteButton.classList.add("button-small");
-            deleteButton.textContent = "Delete🗑️";
-            deleteButton.addEventListener("click", () => handleDelete(file.id));
-
-            const uploadedBy = document.createElement("div");
-            uploadedBy.classList.add("uploaded-by");
-            uploadedBy.innerHTML = `<span>Uploaded by:</span><span> <b> ${file.username} </b></span>`;
-
-            // Append buttons to file entry
-            buttonsContainer.appendChild(uploadedBy);
-            buttonsContainer.appendChild(shareButton);
-            buttonsContainer.appendChild(downloadButton);
-            buttonsContainer.appendChild(deleteButton);
-
-            if (userRole === "user") {
-              // Hide buttons for "user"
-              shareButton.style.display = "none";
-              deleteButton.style.display = "none";
-            }
-
-            if (fileListOthers) fileListOthers.appendChild(fileEntry);
+            createFileEntry(file, fileList, false);
           });
         } else {
           const noFilesMessage = document.createElement("p");
           noFilesMessage.textContent = "No files uploaded yet.";
-          fileListOthers.appendChild(noFilesMessage);
+          fileList.appendChild(noFilesMessage);
         }
       } else {
         console.error("Failed to fetch files:", data.message);
@@ -147,8 +153,8 @@ const listFiles = async () => {
     console.error("Network error occurred:", error.message);
   }
 };
-*/
 
+// List All Files
 const listFiles = async () => {
   try {
     // Fetch user data or role from your authentication system
@@ -163,7 +169,6 @@ const listFiles = async () => {
         const userRole = userData.role; // Assuming your user data contains the role
 
         // Now, you can use the userRole variable to conditionally show/hide buttons
-
         const response = await fetch(
           "http://localhost/file-sharing-app/api/list_all_files.php"
         );
@@ -184,55 +189,7 @@ const listFiles = async () => {
             // Populate "file-list" and "file-list-others" elements
             if (data.files.length > 0) {
               data.files.forEach((file) => {
-                const fileEntry = document.createElement("div");
-                fileEntry.classList.add("file-list__item");
-                fileEntry.textContent = file.filename;
-
-                const buttonsContainer = document.createElement("div");
-                buttonsContainer.classList.add("file-list__buttons-container");
-                fileEntry.appendChild(buttonsContainer);
-
-                // Create buttons for delete, share, and download
-
-                const shareButton = document.createElement("button");
-                shareButton.classList.add("button-small");
-                shareButton.textContent = "Share🔗";
-                shareButton.addEventListener("click", () =>
-                  handleShare(file.id)
-                );
-
-                const downloadButton = document.createElement("button");
-                downloadButton.classList.add("button-small");
-                downloadButton.textContent = "Download 📥";
-                downloadButton.addEventListener("click", () =>
-                  handleDownload(file.id, file.filename)
-                );
-
-                const deleteButton = document.createElement("button");
-                deleteButton.classList.add("button-small");
-                deleteButton.textContent = "Delete🗑️";
-                deleteButton.addEventListener("click", () =>
-                  handleDelete(file.id)
-                );
-
-                const uploadedBy = document.createElement("div");
-                uploadedBy.classList.add("uploaded-by");
-                uploadedBy.innerHTML = `<span>Uploaded by:</span><span> <b> ${file.username} </b></span>`;
-
-                // Append buttons to file entry
-                buttonsContainer.appendChild(uploadedBy);
-                buttonsContainer.appendChild(shareButton);
-                buttonsContainer.appendChild(downloadButton);
-                buttonsContainer.appendChild(deleteButton);
-
-                if (userRole === "user") {
-                  // Hide buttons for "user"
-                  // downloadButton.style.display = "none";
-                  shareButton.style.display = "none";
-                  deleteButton.style.display = "none";
-                }
-
-                if (fileListOthers) fileListOthers.appendChild(fileEntry);
+                createFileEntry(file, fileListOthers, true, userRole);
               });
             } else {
               const noFilesMessage = document.createElement("p");
@@ -250,92 +207,6 @@ const listFiles = async () => {
       }
     } else {
       console.error("HTTP Error:", userDataResponse.status);
-    }
-  } catch (error) {
-    console.error("Network error occurred:", error.message);
-  }
-};
-
-// List User Files
-const listMyFiles = async () => {
-  try {
-    const response = await fetch(
-      "http://localhost/file-sharing-app/api/list_my_files.php"
-    );
-    if (response.ok) {
-      const data = await response.json();
-
-      if (data.success) {
-        const fileList = document.getElementById("file-list");
-        const fileListOthers = document.getElementById("file-list-others");
-
-        // Reset UI
-        const existingFiles = fileList.querySelectorAll("div");
-        if (existingFiles) existingFiles.forEach((file) => file.remove());
-
-        // Populate "file-list" and "file-list-others" elements
-        if (data.files.length > 0) {
-          data.files.forEach((file) => {
-            const fileEntry = document.createElement("div");
-            fileEntry.classList.add("file-list__item");
-            fileEntry.textContent = file.filename;
-
-            const buttonsContainer = document.createElement("div");
-            buttonsContainer.classList.add("file-list__buttons-container");
-            fileEntry.appendChild(buttonsContainer);
-
-            // Create buttons for delete, share, and download
-
-            const shareButton = document.createElement("button");
-            shareButton.classList.add("button-small");
-            shareButton.textContent = "Share🔗";
-            shareButton.addEventListener("click", () => handleShare(file.id));
-
-            const downloadButton = document.createElement("button");
-            downloadButton.classList.add("button-small");
-            downloadButton.textContent = "Download 📥";
-            downloadButton.addEventListener("click", () =>
-              handleDownload(file.id, file.filename)
-            );
-
-            const deleteButton = document.createElement("button");
-            deleteButton.classList.add("button-small");
-            deleteButton.textContent = "Delete🗑️";
-            deleteButton.addEventListener("click", () => handleDelete(file.id));
-
-            // Append buttons to file entry
-            buttonsContainer.appendChild(shareButton);
-            buttonsContainer.appendChild(downloadButton);
-            buttonsContainer.appendChild(deleteButton);
-
-            // console.log(file);
-            fileList.appendChild(fileEntry);
-
-            // if (file.user_role === "user") {
-            //   // Display files under "My Files" for "user"
-            //   fileList.appendChild(fileEntry);
-            // }
-
-            // if (file.user_role === "admin") {
-            //   // Display files under "My Files" for "admin"
-            //   fileList.appendChild(fileEntry);
-            // }
-
-            // if (file.user_role === "admin") {
-            //   // Display files under "Files by other Users" for "admin" only
-            //   fileListOthers.appendChild(fileEntry);
-            // }
-          });
-        } else {
-          const noFilesMessage = document.createElement("p");
-          noFilesMessage.textContent = "No files uploaded yet.";
-          fileList.appendChild(noFilesMessage);
-        }
-      } else {
-        console.error("Failed to fetch files:", data.message);
-      }
-    } else {
-      console.error("HTTP Error:", response.status);
     }
   } catch (error) {
     console.error("Network error occurred:", error.message);
