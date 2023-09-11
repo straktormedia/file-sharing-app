@@ -1,7 +1,6 @@
 // This file sends requests to the API which are the following file:
-// get_user_data.php, list_all_files.php, list_my_files.php, share.php, download.php, delete.php and get_username.php
+// get_user_data.php, list_all_files.php, list_my_files.php, share.php, download.php, delete.php and get_user_data.php
 
-// Uploads
 const uploadButton = document.querySelector("[upload-btn]");
 const fileInput = document.querySelector("[file-input]");
 const progressBar = document.querySelector('[data-progress="bar"]');
@@ -87,6 +86,7 @@ const handleDelete = async (fileId) => {
   }
 };
 
+// Create File Entry
 const createFileEntry = (file, container, author = true, userRole) => {
   const fileEntry = document.createElement("div");
   fileEntry.classList.add("file-list__item");
@@ -292,43 +292,34 @@ const listFiles = async () => {
   }
 };
 
-// Close the share dialog
-const closeShareDialogButton = document.getElementById("closeShareDialog");
-closeShareDialogButton.addEventListener("click", () => {
-  const shareDialog = document.getElementById("shareDialog");
-  shareDialog.close();
-});
-
-// Get username
-const updateUsername = async () => {
+// Get username for Welcome Message
+const getUsername = async () => {
   try {
     const response = await fetch(
-      "http://localhost/file-sharing-app/api/get_username.php"
+      "http://localhost/file-sharing-app/api/get_user_data.php"
     );
 
     if (response.ok) {
       const data = await response.json();
-      if (data.success && data.username) {
-        // Update the username placeholder
+      if (data.success) {
+        // Welcome message
         const usernamePlaceholder = document.getElementById(
           "usernamePlaceholder"
         );
         usernamePlaceholder.textContent = data.username;
       }
     } else {
-      console.error("Failed to fetch username:", response.status);
+      console.error("Failed to fetch user data:", response.status);
     }
   } catch (error) {
     console.error(
-      "Network error occurred while fetching username:",
+      "Network error occurred while fetching user data:",
       error.message
     );
   }
 };
 
-// Call the function to update the username
-updateUsername();
-
+getUsername();
 listFiles();
 listMyFiles();
 
@@ -353,4 +344,11 @@ uploadButton.addEventListener("click", async (e) => {
   } else {
     alert("No file selected for upload");
   }
+});
+
+// Close the share dialog
+const closeShareDialogButton = document.getElementById("closeShareDialog");
+closeShareDialogButton.addEventListener("click", () => {
+  const shareDialog = document.getElementById("shareDialog");
+  shareDialog.close();
 });
