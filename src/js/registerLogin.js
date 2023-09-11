@@ -104,24 +104,18 @@ loginForm.addEventListener("submit", async (e) => {
       const data = await response.json();
       if (data.success) {
         window.location.href = "admin-dashboard.html";
-
-        /*
-        // Check the user's role
-        const userRole = data.role;
-        if (userRole === "user") {
-          // Redirect to the user dashboard
-          window.location.href = "dashboard.html";
-        } else if (userRole === "admin") {
-          // Redirect to the admin dashboard
-          window.location.href = "admin-dashboard.html";
-        } else {
-          // Handle unknown role
-          console.error("Unknown user role: " + userRole);
-        }
-        */
       } else {
-        // Login failed, display error message
-        console.error("Login failed: " + data.message);
+        // Access both HTTP status code and custom message
+        const httpStatus = data.http_status;
+        const errorMessage = data.message;
+
+        if (httpStatus === 401) {
+          alert("Unauthorized: " + errorMessage);
+        } else if (httpStatus === 404) {
+          alert("Not Found: " + errorMessage);
+        } else {
+          console.error("Login failed: " + errorMessage);
+        }
       }
     } else {
       // Handle HTTP error responses
