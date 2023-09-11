@@ -1,0 +1,31 @@
+// Utilities
+.boxed {
+  max-width: 1200px;
+}
+
+@media screen and (max-width: 992px) {
+  .boxed {
+    max-width: revert;
+    padding: 0 20px;
+  }
+}
+
+.centered {
+  margin: 0 auto;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media screen and (max-width: 992px) {
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hidden {
+  display: none;
+}
