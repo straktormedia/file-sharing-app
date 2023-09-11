@@ -1,5 +1,6 @@
 const profileUsername = document.querySelector("[data-profile-username]");
 const profileEmail = document.querySelector("[data-profile-email]");
+const profileRole = document.querySelector("[data-profile-role]");
 
 // Get user data
 const getUserData = async () => {
@@ -17,9 +18,10 @@ const getUserData = async () => {
         );
         usernamePlaceholder.textContent = data.username;
 
-        // Update the profile details with user data
+        // Profile data
         profileUsername.textContent = data.username;
-        profileEmail.textContent = data.email; // Display the email
+        profileEmail.textContent = data.email;
+        profileRole.textContent = data.role;
       }
     } else {
       console.error("Failed to fetch user data:", response.status);

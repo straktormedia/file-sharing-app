@@ -28,6 +28,7 @@ I used some of my common SCSS practices.
 First time building backend, I used GPT, and then studying the answer to understand. Definetely learned a lot on the process.
 Struggling with PHP syntax and Database interactions.
 No experience at all in security.
+GitHub commits to view the progress.
 
 ## Bugs
 
