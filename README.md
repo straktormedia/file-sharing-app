@@ -35,6 +35,6 @@ GitHub commits to view the progress.
 display:none is not the best practice for not showing share,delete buttons
 get_username.php and get_user_data.php could be one file.
 Existing email/username on registration is not working correctly.
-Progress bar is giving an error althought it works.
+Progress bar is giving an error although it works.
 Some errors come with alert because of no time.
 No time to refactor. My code is usually organized.

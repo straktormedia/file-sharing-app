@@ -129,9 +129,9 @@ const createFileEntry = (file, container, author = true, userRole) => {
 
   if (userRole === "user") {
     // Hide buttons for "user"
-    // downloadButton.style.display = "none";
-    shareButton.style.display = "none";
-    deleteButton.style.display = "none";
+
+    shareButton.remove();
+    deleteButton.remove();
   }
 
   if (container) container.appendChild(fileEntry);
