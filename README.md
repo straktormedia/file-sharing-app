@@ -15,10 +15,12 @@ Profile is at Welcome on the top left side.
 
 ## Setup Instructions
 
-To run the app, you will need to download and install <b>XAMPP</b>. It provides a local Apache server with mySQL and phpMyAdmin. After installing it and starting Apache and mySQL, follow these 2 simple steps:
+To run the app, you will need to clone and download this repo as well as install <b>XAMPP</b>. XAMPP provides a local Apache server with mySQL and phpMyAdmin. After installing it and starting Apache and mySQL, follow these 3 simple steps:
 
-1. Open your browser and navigate to "localhost/phpmyadmin". Import the database "file-sharing-app.sql" provided in the repo.
-2. To view and use the application, go to "localhost/file-sharing-app".
+1. Open your browser and navigate to "localhost/phpmyadmin". Create a database called "file-sharing-app" and then import the database "file-sharing-app.sql" provided in the repo.
+2. Clone the repo to your XAMPP installation directory, inside the <b>htdocs</b> folder. For example "C:\xampp\htdocs".<br>
+   <u>NOTE: </u>If you download the repo as zip, make sure you rename the extracted folder to "file-sharing-app" (it might be named "file-sharing-app-main" because of the Git branch). Our goal is a path like this "C:\xampp\htdocs\file-sharing-app".
+3. View and use the application, by navigating to "localhost/file-sharing-app".
 
 ## Additional Information
 
