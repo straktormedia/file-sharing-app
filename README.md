@@ -32,10 +32,11 @@ If your account role is "admin" you can Share, Download and Delete any file from
 To run the app, you will need to clone and download this repo as well as install <b>XAMPP</b>. XAMPP provides a local Apache server with mySQL and phpMyAdmin. After installing it, follow these 4 steps:
 
 1. Starting Apache and mySQL from XAMPP Control Panel.
-2. Open your browser and navigate to "localhost/phpmyadmin". Create a database called "file-sharing-app" and then import the database "file-sharing-app.sql" provided in the repo.
+2. Open your browser and navigate to "localhost/phpmyadmin". Create a database called "file-sharing-app" and then import the database "file-sharing-app.sql" provided in the repo inside the folder "database".
 3. Clone the repo to your XAMPP installation directory, inside the <b>htdocs</b> folder. For example "C:\xampp\htdocs".<br>
-   <u>NOTE: </u>If you download the repo as zip, make sure you rename the extracted folder to "file-sharing-app" (it might be named "file-sharing-app-main" because of the Git branch). Our goal is a path like this "C:\xampp\htdocs\file-sharing-app".
-4. Go to your browser at "localhost/file-sharing-app" to view and use the application.
+   <u>NOTE: </u>If you download the repo as zip, make sure you rename the extracted folder to "file-sharing-app" (it might be named "file-sharing-app-main" because of the Git branch). Our goal is a path like this <br> "C:\xampp\htdocs\file-sharing-app".
+4. Go to your browser at "localhost/file-sharing-app" to view and use the application. <br>
+   There are 2 test accounts if you want to quickly login. vasilis which is an "admin" and straktormedia which is "user". The password for all is 12345678i.
 
 ## Additional Information
 
