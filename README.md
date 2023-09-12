@@ -19,13 +19,13 @@ If you already have an account or just registered, you can login with your usern
 
 Here you are being welcomed with your username. There is also a Logout button that uses the "logout.php" file to log the user out. If you click on your username, you can see your profile details at "profile.html". This is done by "profile.js" which fills in the correct data by getting them from the database using the "get_user_data.php" file. There is a button to take the user back to Dashboard. Note that if you log out, and try to navigate to "profile.html" or "admin-dashhboard.html", you will be redirected to "index.html" to register or login. This is made by the "authentication.js" and "authentication.php" files.
 
-### Upload and Manage File
+### Upload and Manage Files
 
 Back to our Dashboard, we have the option to upload files. "upload.php" is responsible for that, after getting the request from "script.js". The files accepted are .pdf, .doc, .jpg, .png. We have a progress bar and the uploaded file is displayed on the right side along with controls with Share, Download and Delete. Below at "All Files" section we can see all files uploaded by all users.
 
 ### Permissions
 
-If your account role is "admin" you can Share, Download and Delete any file from any user. If your account role is "user" you can only Download files from other users. (download is random, just to show that the role user can perform less actions).
+If your account role is "admin" you can Share, Download and Delete any file from any user. If your account role is "user" you can only Download files from other users (download is random, just to show that the role "user" can perform less actions). However, you can Share, Download and Delete you own files.
 
 ## Setup Instructions
 
