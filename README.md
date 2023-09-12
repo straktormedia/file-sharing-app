@@ -8,7 +8,7 @@ When you launch the application, it asks you to Login or Register.
 
 ### Register
 
-The "registerLogin.js" file is responsible for data validation. These are: Correct email format, password and password confirm match as well as the password to be at least 8 characters and contain a letter and a number. The "register.php" registers the user to the database, and gives error if the username or email already exist. The password is encrypted. PASSWORD_DEFAULT uses bcrypt for hashing.
+The "registerLogin.js" file is responsible for data validation. These are: correct email format, password and password confirm match as well as the password to be at least 8 characters and contain a letter and a number. The password is encrypted. PASSWORD_DEFAULT uses bcrypt for hashing. The "register.php" registers the user to the database, and gives error if the username or email already exist.
 We have 2 roles. Each user role has a different permissions. After you succesfully register, you are prompted to login, and the register form disappears.
 
 ### Login
