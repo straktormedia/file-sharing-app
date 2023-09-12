@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2023 at 10:10 PM
+-- Generation Time: Sep 12, 2023 at 12:28 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -37,6 +37,18 @@ CREATE TABLE `uploaded_files` (
   `user_role` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `uploaded_files`
+--
+
+INSERT INTO `uploaded_files` (`id`, `user_id`, `filename`, `upload_date`, `username`, `file_path`, `user_role`) VALUES
+(105, 39, 'Vasileios-Pafiliaris-Web-Dev-CV.pdf', '2023-09-12 10:15:20', 'straktormedia', '../uploads/user_39/Vasileios-Pafiliaris-Web-Dev-CV.pdf', 'user'),
+(106, 39, 'certificate.pdf', '2023-09-12 10:16:29', 'straktormedia', '../uploads/user_39/certificate.pdf', 'user'),
+(107, 40, 'Web_Developer_Case Study.pdf', '2023-09-12 10:17:41', 'vasilis', '../uploads/user_40/Web_Developer_Case Study.pdf', 'admin'),
+(108, 40, 'Git-Github.pdf', '2023-09-12 10:18:20', 'vasilis', '../uploads/user_40/Git-Github.pdf', 'admin'),
+(109, 41, 'Bleximo Notes  (DLFRIP) (3).pdf', '2023-09-12 10:19:37', 'vasilis_user', '../uploads/user_41/Bleximo Notes  (DLFRIP) (3).pdf', 'user'),
+(121, 40, 'github.png', '2023-09-12 10:28:04', 'vasilis', '../uploads/user_40/github.png', 'admin');
+
 -- --------------------------------------------------------
 
 --
@@ -56,8 +68,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`) VALUES
-(26, 'vasilis', 'vasilisound@gmail.com', '$2y$10$Bm8IZW260.rCIjBoJa5rP.HtdeHpFDUrlFpO7xc/WySaH5pOy6K32', 'admin'),
-(27, 'straktormedia', 'straktormedia@gmail.com', '$2y$10$KTpKl88gbaLmusanGAWz7eywS9MvP0dsURaBf3Z20kBg6yxUIfcE6', 'user');
+(39, 'straktormedia', 'straktormedia@gmail.com', '$2y$10$waXueFurybQasKA1y5dffeFqBLEwJ4iDjKMjjxeVfscQS85uxK3fG', 'user'),
+(40, 'vasilis', 'vasilisound@gmail.com', '$2y$10$5BWwdLNFqyWpUfNGriVE.emdDuXEXcRe.JoHbtmqwQBRieLcdEGcO', 'admin'),
+(41, 'vasilis_user', 'vasilisound@outlook.com.gr', '$2y$10$rp64Cm6yvvwv72Go1lcRsuPRBrfgxcLJcIC7N3IquyzDFneiPJOhq', 'user');
 
 --
 -- Indexes for dumped tables
@@ -84,13 +97,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `uploaded_files`
 --
 ALTER TABLE `uploaded_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- Constraints for dumped tables

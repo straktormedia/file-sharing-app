@@ -130,6 +130,10 @@ const createFileEntry = (file, container, author = true, userRole) => {
 
 // Upload File
 const uploadFile = async (formData) => {
+  // Reset UI
+  progressContainer.style.width = `0%`;
+  progressText.textContent = ` `;
+
   try {
     const response = await fetch(`${siteURL}api/upload.php`, {
       method: "POST",
