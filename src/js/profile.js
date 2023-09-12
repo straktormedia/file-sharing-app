@@ -1,3 +1,6 @@
+import siteURL from "./config.js";
+
+const welcomeUsername = document.querySelector("[data-welcome-username]");
 const profileUsername = document.querySelector("[data-profile-username]");
 const profileEmail = document.querySelector("[data-profile-email]");
 const profileRole = document.querySelector("[data-profile-role]");
@@ -5,18 +8,13 @@ const profileRole = document.querySelector("[data-profile-role]");
 // Get user data
 const getUserData = async () => {
   try {
-    const response = await fetch(
-      "http://localhost/file-sharing-app/api/get_user_data.php"
-    );
+    const response = await fetch(`${siteURL}api/get_user_data.php`);
 
     if (response.ok) {
       const data = await response.json();
       if (data.success) {
         // Welcome message
-        const usernamePlaceholder = document.getElementById(
-          "usernamePlaceholder"
-        );
-        usernamePlaceholder.textContent = data.username;
+        welcomeUsername.textContent = data.username;
 
         // Profile data
         profileUsername.textContent = data.username;

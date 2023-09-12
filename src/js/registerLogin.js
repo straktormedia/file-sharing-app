@@ -1,19 +1,21 @@
-// This file sends requests to register.php and login.php
+import siteURL from "./config.js";
+
 // Register
-const registrationSection = document.getElementById("register");
-const registrationForm = document.getElementById("registration-form");
-const successModal = document.getElementById("success-modal");
-const closeSuccessModal = document.getElementById("close-success-modal");
+const registrationForm = document.querySelector("#registration-form");
+
+const registrationSection = document.querySelector(".registration");
+const successModal = document.querySelector(".modal");
+const closeSuccessModal = document.querySelector(".modal__close-btn");
 
 registrationForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   // Get Register Form Values
-  const username = document.getElementById("username").value;
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const confirmPassword = document.getElementById("confirm-password").value;
-  const role = document.getElementById("role").value;
+  const username = document.querySelector("#username").value;
+  const email = document.querySelector("#email").value;
+  const password = document.querySelector("#password").value;
+  const confirmPassword = document.querySelector("#confirm-password").value;
+  const role = document.querySelector("#role").value;
 
   // Data validation
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -40,16 +42,13 @@ registrationForm.addEventListener("submit", async (e) => {
   const requestBody = `username=${username}&email=${email}&password=${password}&confirm-password=${confirmPassword}&role=${role}`;
 
   try {
-    const response = await fetch(
-      "http://localhost/file-sharing-app/register.php",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: requestBody,
-      }
-    );
+    const response = await fetch(`${siteURL}register.php`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: requestBody,
+    });
 
     if (response.ok) {
       const data = await response.json();
@@ -73,32 +72,29 @@ registrationForm.addEventListener("submit", async (e) => {
   }
 });
 
-// Close the success modal when the "Close" button is clicked
+// Close modal when the "Close" button is clicked
 closeSuccessModal.addEventListener("click", () => {
   successModal.close();
 });
 
 // Login
-const loginForm = document.getElementById("login-form");
+const loginForm = document.querySelector("#login-form");
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   // Get Login Form Values
-  const username = document.getElementById("login-username").value;
-  const password = document.getElementById("login-password").value;
+  const username = document.querySelector("#login-username").value;
+  const password = document.querySelector("#login-password").value;
 
   // Send login data to the server
   try {
-    const response = await fetch(
-      "http://localhost/file-sharing-app/login.php",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: `username=${username}&password=${password}`,
-      }
-    );
+    const response = await fetch(`${siteURL}login.php`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: `username=${username}&password=${password}`,
+    });
 
     if (response.ok) {
       const data = await response.json();

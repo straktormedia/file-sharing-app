@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>File Sharing App</title>
     <link rel="stylesheet" href="src/css/main.css" />
+    <script defer type="module" src="src/js/registerLogin.js"></script>
   </head>
   <body>
     <header class="header">
@@ -45,7 +46,7 @@
         </div>
 
         <!-- Register -->
-        <div id="register" class="component">
+        <div class="component registration">
           <p>Don't have an account?</p>
           <h2>Sign Up</h2>
           <form id="registration-form" class="registration-form">
@@ -78,15 +79,13 @@
         </div>
 
         <!-- Success Modal -->
-        <dialog id="success-modal" class="share-link-modal">
-          <div class="share-link-modal__header">
+        <dialog class="modal">
+          <div class="modal__header">
             <p>Registration successful! Please log in.</p>
-            <button id="close-success-modal" class="button-small">✔️</button>
+            <button class="button-small modal__close-btn">✔️</button>
           </div>
         </dialog>
       </section>
     </main>
-
-    <script src="src/js/registerLogin.js"></script>
   </body>
 </html>

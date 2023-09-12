@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>File Sharing App</title>
     <link rel="stylesheet" href="src/css/main.css" />
+    <script defer type="module" src="src/js/authentication.js"></script>
+    <script defer type="module" src="src/js/script.js"></script>
   </head>
   <body>
     <header class="header">
@@ -59,16 +61,21 @@
             <div id="file-list" class="file-list">
               <!-- File entries will be dynamically added here -->
             </div>
-            <dialog id="shareDialog" class="share-link-modal">
-              <div class="share-link-modal__header">
+            <dialog id="shareDialog" class="modal">
+              <div class="modal__header">
                 <p>Shareable Link:</p>
-                <button id="closeShareDialog" class="button-small">❌</button>
+                <button
+                  id="closeShareDialog"
+                  class="button-small modal__close-btn"
+                >
+                  ❌
+                </button>
               </div>
               <input
                 id="shareableLinkInput"
                 type="text"
                 readonly
-                class="share-link-modal__link"
+                class="modal__link"
               />
             </dialog>
           </div>
@@ -81,8 +88,8 @@
             <div id="file-list-others" class="file-list">
               <!-- File entries will be dynamically added here -->
             </div>
-            <dialog id="shareDialog" class="share-link-modal">
-              <div class="share-link-modal__header">
+            <dialog id="shareDialog" class="modal">
+              <div class="modal__header">
                 <p>Shareable Link:</p>
                 <button id="closeShareDialog" class="button-small">❌</button>
               </div>
@@ -90,15 +97,12 @@
                 id="shareableLinkInput"
                 type="text"
                 readonly
-                class="share-link-modal__link"
+                class="modal__link"
               />
             </dialog>
           </div>
         </div>
       </section>
     </main>
-
-    <script src="src/js/authentication.js"></script>
-    <script src="src/js/script.js"></script>
   </body>
 </html>

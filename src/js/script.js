@@ -1,18 +1,16 @@
-// This file sends requests to the API which are the following file:
-// get_user_data.php, list_all_files.php, list_my_files.php, share.php, download.php, delete.php and get_user_data.php
+import siteURL from "./config.js";
 
 const uploadButton = document.querySelector("[upload-btn]");
 const fileInput = document.querySelector("[file-input]");
-const progressBar = document.querySelector('[data-progress="bar"]');
 const progressText = document.querySelector('[data-progress="text"]');
 const progressContainer = document.querySelector('[data-container="progress"]');
+
+const shareModal = document.querySelector(".modal");
 
 // Share
 const handleShare = async (fileId) => {
   try {
-    const response = await fetch(
-      `http://localhost/file-sharing-app/api/share.php?id=${fileId}`
-    );
+    const response = await fetch(`${siteURL}api/share.php?id=${fileId}`);
 
     if (response.ok) {
       const data = await response.json();
@@ -22,9 +20,7 @@ const handleShare = async (fileId) => {
           document.getElementById("shareableLinkInput");
         shareableLinkInput.value = data.shareable_link;
 
-        // Show the modal
-        const shareDialog = document.getElementById("shareDialog");
-        shareDialog.showModal();
+        shareModal.showModal();
       } else {
         // Handle sharing error, e.g., display an error message
         console.error(`File sharing failed: ${data.message}`);
@@ -42,9 +38,7 @@ const handleShare = async (fileId) => {
 // Download
 const handleDownload = async (fileId, filename) => {
   try {
-    const response = await fetch(
-      `http://localhost/file-sharing-app/api/download.php?id=${fileId}`
-    );
+    const response = await fetch(`${siteURL}api/download.php?id=${fileId}`);
 
     if (response.ok) {
       const blob = await response.blob();
@@ -70,12 +64,9 @@ const handleDownload = async (fileId, filename) => {
 // Delete
 const handleDelete = async (fileId) => {
   // Send a request to delete.php with the file ID
-  const response = await fetch(
-    `http://localhost/file-sharing-app/api/delete.php?id=${fileId}`,
-    {
-      method: "DELETE",
-    }
-  );
+  const response = await fetch(`${siteURL}api/delete.php?id=${fileId}`, {
+    method: "DELETE",
+  });
 
   if (response.ok) {
     // File deleted successfully, update the UI
@@ -140,13 +131,10 @@ const createFileEntry = (file, container, author = true, userRole) => {
 // Upload File
 const uploadFile = async (formData) => {
   try {
-    const response = await fetch(
-      "http://localhost/file-sharing-app/api/upload.php",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    const response = await fetch(`${siteURL}api/upload.php`, {
+      method: "POST",
+      body: formData,
+    });
 
     // Create a ReadableStream from the Response body
     const reader = response.body.getReader();
@@ -199,9 +187,7 @@ const uploadFile = async (formData) => {
 // List User Files
 const listMyFiles = async () => {
   try {
-    const response = await fetch(
-      "http://localhost/file-sharing-app/api/list_my_files.php"
-    );
+    const response = await fetch(`${siteURL}api/list_my_files.php`);
     if (response.ok) {
       const data = await response.json();
 
@@ -237,9 +223,7 @@ const listMyFiles = async () => {
 const listFiles = async () => {
   try {
     // Fetch user data or role from your authentication system
-    const userDataResponse = await fetch(
-      "http://localhost/file-sharing-app/api/get_user_data.php"
-    );
+    const userDataResponse = await fetch(`${siteURL}api/get_user_data.php`);
 
     if (userDataResponse.ok) {
       const userData = await userDataResponse.json();
@@ -248,9 +232,7 @@ const listFiles = async () => {
         const userRole = userData.role; // Assuming your user data contains the role
 
         // Now, you can use the userRole variable to conditionally show/hide buttons
-        const response = await fetch(
-          "http://localhost/file-sharing-app/api/list_all_files.php"
-        );
+        const response = await fetch(`${siteURL}api/list_all_files.php`);
 
         if (response.ok) {
           const data = await response.json();
@@ -295,9 +277,7 @@ const listFiles = async () => {
 // Get username for Welcome Message
 const getUsername = async () => {
   try {
-    const response = await fetch(
-      "http://localhost/file-sharing-app/api/get_user_data.php"
-    );
+    const response = await fetch(`${siteURL}api/get_user_data.php`);
 
     if (response.ok) {
       const data = await response.json();
@@ -347,8 +327,8 @@ uploadButton.addEventListener("click", async (e) => {
 });
 
 // Close the share dialog
-const closeShareDialogButton = document.getElementById("closeShareDialog");
-closeShareDialogButton.addEventListener("click", () => {
-  const shareDialog = document.getElementById("shareDialog");
-  shareDialog.close();
+const closeShareModal = document.querySelector(".modal__close-btn");
+closeShareModal.addEventListener("click", () => {
+  // const shareModal = document.querySelector(".modal");
+  shareModal.close();
 });

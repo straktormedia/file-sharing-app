@@ -1,11 +1,9 @@
-// This file sends requests to authentication.php
+import siteURL from "./config.js";
 
 // Check if the user is authenticated (server-side session)
 const checkAuthentication = async () => {
   try {
-    const response = await fetch(
-      "http://localhost/file-sharing-app/authentication.php"
-    );
+    const response = await fetch(`${siteURL}authentication.php`);
 
     if (!response.ok) {
       window.location.href = "index.html";

@@ -98,7 +98,7 @@ a {
   border-radius: 8px;
 }
 
-.share-link-modal {
+.modal {
   min-width: 500px;
   inset: 0;
   margin: auto;
@@ -106,12 +106,12 @@ a {
   border: solid 1px black;
   border-radius: 8px;
 }
-.share-link-modal__header {
+.modal__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.share-link-modal__link {
+.modal__link {
   width: 100%;
   margin-top: 20px;
   padding: 16px 4px;

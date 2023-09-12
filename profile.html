@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>File Sharing App</title>
     <link rel="stylesheet" href="src/css/main.css" />
+    <script defer type="module" src="src/js/authentication.js"></script>
+    <script defer type="module" src="src/js/profile.js"></script>
   </head>
   <body>
     <header class="header">
@@ -12,7 +14,7 @@
         <p>
           Welcome,
           <a href="profile.html"
-            ><b><span id="usernamePlaceholder"></span></b
+            ><b><span data-welcome-username></span></b
           ></a>
         </p>
         <h1 class="boxed centered logo">File Sharing App 📄 → ☁️</h1>
@@ -24,10 +26,9 @@
       </div>
     </header>
     <main class="main">
-      <!-- File Management -->
-
-      <section id="file-management" class="file-management">
-        <div class="file-management__container boxed centered">
+      <!-- Profile -->
+      <section>
+        <div class="boxed centered">
           <a href="admin-dashboard.html" class="dashboard-link"
             >← Back to Dashboard</a
           >
@@ -49,7 +50,5 @@
         </div>
       </section>
     </main>
-
-    <script src="src/js/profile.js"></script>
   </body>
 </html>
