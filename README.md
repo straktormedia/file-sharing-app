@@ -4,14 +4,28 @@ A secure file sharing application using HTML, JavaScript, PHP, Mysql and a REST 
 
 ## Overview
 
-The steps followed to create this application are the following: <br>
-Basic Frontend, Database Setup, API, Connections, Refactoring, Polishing Frontend.
-For now the files accepted are .pdf, .doc, .jpg, .png.
-Register has data validation and checks if the username or the email exists in the database.
-The user logs in with the username and the password.
-The password is encrypted. PASSWORD_DEFAULT uses bcrypt for hashing.
-We have 2 roles. Each user role has a different permissions. One can Download, Share and Delete and the other can just view the files.
-Profile is at Welcome on the top left side.
+When you launch the application, it asks you to Login or Register.
+
+### Register
+
+The "registerLogin.js" file is responsible for data validation. These are: Correct email format, password and password confirm match as well as the password to be at least 8 characters and contain a letter and a number. The "register.php" registers the user to the database, and gives error if the username or email already exist. The password is encrypted. PASSWORD_DEFAULT uses bcrypt for hashing.
+We have 2 roles. Each user role has a different permissions. After you succesfully register, you are prompted to login, and the register form disappears.
+
+### Login
+
+If you already have an account or just registered, you can login with your username and password. Here, again the "registerLogin.js" file sends the data to the database via "login.php" to authenticate the user. After that you are redirected to "admin-dashboard.html".
+
+### Dashboard & Profile
+
+Here you are being welcomed with your username. There is also a Logout button that uses the "logout.php" file to log the user out. If you click on your username, you can see your profile details at "profile.html". This is done by "profile.js" which fills in the correct data by getting them from the database using the "get_user_data.php" file. There is a button to take the user back to Dashboard. Note that if you log out, and try to navigate to "profile.html" or "admin-dashhboard.html", you will be redirected to "index.html" to register or login. This is made by the "authentication.js" and "authentication.php" files.
+
+### Upload and Manage File
+
+Back to our Dashboard, we have the option to upload files. "upload.php" is responsible for that, after getting the request from "script.js". The files accepted are .pdf, .doc, .jpg, .png. We have a progress bar and the uploaded file is displayed on the right side along with controls with Share, Download and Delete. Below at "All Files" section we can see all files uploaded by all users.
+
+### Permissions
+
+If your account role is "admin" you can Share, Download and Delete any file from any user. If your account role is "user" you can only Download files from other users. (download is random, just to show that the role user can perform less actions).
 
 ## Setup Instructions
 
@@ -25,17 +39,17 @@ To run the app, you will need to clone and download this repo as well as install
 
 ## Additional Information
 
-Keeping notes here along the way.
-I was adding columns to the database tables, while building the app.
-I used some of my common SCSS practices.
-First time building backend, I used GPT, and then studying the answer to understand. Definetely learned a lot on the process.
-Struggling with PHP syntax and Database interactions.
-No experience at all in security.
-GitHub commits to view the progress.
+The steps followed to create this application are the following: <br>
+Basic Frontend, Database Setup, API, Connections, Refactoring, Polishing Frontend, Refactoring again. Here are some things you might want to know: <br>
 
-## Bugs
+1. This is the first time I was building a backend. I am not very familiar with PHP syntax, as I has only used it in WordPress. Database interactions is also something I haven't done much. I also have no experience at all in security.
+2. I used GPT (for backend). This would take at least 3 timess more time without it. I think it is fair to mentioned it (although tools are tools). I then studied the code to understand it and change/remove unneccesary code. I definetely learned a lot on the process.
+3. To make this README file, I was keeping notes all the time while building the app.
+4. You can see the progress of the app (and of this README) from my Github commits.
 
-Existing email/username on registration is not working correctly.
-Progress bar is giving an error although it works.
-Some errors come with alert because of no time.
-No time to refactor. My code is usually organized.
+## Bugs/ Things to fix
+
+1. Progress bar is giving an error although it works.
+2. Existing email/username on registration is not working correctly.
+3. Some errors come with alert because of no time.
+4. No time to refactor properly.
